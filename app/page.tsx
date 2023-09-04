@@ -6,48 +6,27 @@ import { redirect, useRouter } from "next/navigation";
 
 export default function Home() {
 	// const router = useRouter();
-	const clientID = process.env.CLIENT_ID;
-	console.log(clientID);
+	// const clientID = process.env.CLIENT_ID;
+	// console.log(clientID);
 
-	const params = new URLSearchParams();
-	params.append("client_id", clientID);
-	params.append("response_type", "code");
-	params.append("redirect_uri", "http://localhost:3000/callback");
-	params.append("scope", "user-read-private user-read-email ");
+	// const params = new URLSearchParams();
+	// params.append("client_id", clientID);
+	// params.append("response_type", "code");
+	// params.append("redirect_uri", "http://localhost:3000/callback");
+	// params.append("scope", "user-read-private user-read-email ");
 
-	const handleLogIn = (e: any) => {
-		// e.preventDefault();
-		// console.log("testing login stuff");
-		// redirect(`https://accounts.spotify.com/authorize?${params.toString()}`);
-		// router.push("/callback");
-		window.location.href = `https://accounts.spotify.com/authorize?${params.toString()}`;
-	};
+	// const handleLogIn = (e: any) => {
+	// 	// e.preventDefault();
+	// 	// console.log("testing login stuff");
+	// 	// redirect(`https://accounts.spotify.com/authorize?${params.toString()}`);
+	// 	// router.push("/callback");
+	// 	window.location.href = `https://accounts.spotify.com/authorize?${params.toString()}`;
+	// };
 	return (
 		<>
 			<h1>WELCOME TO SPOTIFY STATS</h1>
 
-			<Button onClick={handleLogIn}>LOG IN</Button>
+			{/* <Button onClick={handleLogIn}>LOG IN</Button> */}
 		</>
 	);
 }
-
-// "use client";
-// import { Button } from "@/components/ui/button";
-// import React, { useEffect } from "react";
-
-// type Props = {};
-
-// const Home = (props: Props) => {
-// 	// const stuff = searchParams.get("shoes");
-// 	// console.log(stuff);
-
-// 	const handleLogIn = () => {
-// 	};
-
-// 	return (
-// 		<>
-// 			<h1>WELCOME TO SPOTIFY WRAPPED</h1>
-// 			<Button onClick={handleLogIn()}>LOG IN</Button>
-// 		</>
-// 	);
-// };
