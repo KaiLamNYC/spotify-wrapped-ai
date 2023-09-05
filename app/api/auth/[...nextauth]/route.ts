@@ -1,10 +1,15 @@
-import { authOptions } from "@/lib/nextauth";
-import NextAuth from "next-auth/next";
+import NextAuth from "next-auth";
+import SpotifyProvider from "next-auth/providers/spotify";
 
-// https://next-auth.js.org/getting-started/typescript
+export const authOptions = {
+	// Configure one or more authentication providers
+	providers: [
+		SpotifyProvider({
+			clientId: process.env.SPOTIFY_CLIENT_ID as string,
+			clientSecret: process.env.SPOTIFY_CLIENT_SECRET as string,
+		}),
+		// ...add more providers here
+	],
+};
 
-//PASSING THE OPTIONS WE MADE IN LIB
-const handler = NextAuth(authOptions);
-
-//GET REQUEST AND POST REQUEST ARE BOTH HANDLER
-export { handler as GET, handler as POST };
+export default NextAuth(authOptions);
