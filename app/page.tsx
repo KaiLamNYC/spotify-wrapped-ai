@@ -1,5 +1,5 @@
-"use client";
-
+// import LogIn from "@/components/LogInButton";
+import LogIn from "@/components/LogInButton";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { redirect, useRouter } from "next/navigation";
@@ -25,7 +25,7 @@ export default function Home() {
 	return (
 		<>
 			<h1>WELCOME TO SPOTIFY STATS</h1>
-
+			<LogIn></LogIn>
 			{/* <Button onClick={handleLogIn}>LOG IN</Button> */}
 		</>
 	);

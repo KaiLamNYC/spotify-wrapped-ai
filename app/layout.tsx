@@ -1,4 +1,4 @@
-// RootLayout.tsx
+import Providers from "@/components/Providers";
 import type { Metadata } from "next";
 import { SessionProvider } from "next-auth/react";
 import { Inter } from "next/font/google";
@@ -21,7 +21,7 @@ export default function RootLayout({
 	return (
 		<html lang='en'>
 			<body className={inter.className}>
-				<SessionProvider session={session}>{children}</SessionProvider>
+				<Providers session={session}>{children}</Providers>
 			</body>
 		</html>
 	);
