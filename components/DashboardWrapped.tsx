@@ -21,10 +21,10 @@ const DashboardWrapped = (props: Props) => {
 	const authHeader = {
 		Authorization: `Bearer ${userToken}`,
 	};
-	const { data } = useQuery({
+	const { data, isLoading } = useQuery({
 		queryFn: async () => {
 			const { data } = await axios.get(
-				"https://api.spotify.com/v1/me/top/tracks?limit=3",
+				"https://api.spotify.com/v1/me/top/tracks?limit=5",
 				{ headers: authHeader }
 			);
 			return data;
@@ -49,7 +49,19 @@ const DashboardWrapped = (props: Props) => {
 		<>
 			{/* <div>{session}</div> */}
 			<div>{userToken}</div>
-			<div>{JSON.stringify(data)}</div>
+			<div>{isLoading ? "loading data pls wait" : "done!"}</div>
+			<h2>{session?.user.name} Top Songs</h2>
+			{data && data.items && (
+				<ul>
+					{data.items.map((track, index) => (
+						<li key={index}>
+							<strong>{track.name}</strong> by {track.artists[0].name}
+						</li>
+					))}
+				</ul>
+			)}
+
+			{/* <div>{data}</div> */}
 		</>
 	);
 };
