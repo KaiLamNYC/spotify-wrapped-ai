@@ -1,6 +1,7 @@
 // import { useSession } from "next-auth/react";
 // "use client";
 import DashboardWrapped from "@/components/DashboardWrapped";
+import LogOut from "@/components/LogOutButton";
 import axios from "axios";
 import { useSession } from "next-auth/react";
 import React, { useState } from "react";
@@ -28,6 +29,7 @@ const Dashboard = (props: Props) => {
 	return (
 		<div>
 			<h1>DASHBOARD</h1>
+			<LogOut />
 			{/* <p>{session.accessToken}</p> */}
 			<DashboardWrapped />
 		</div>
