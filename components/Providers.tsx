@@ -7,6 +7,8 @@ import { SessionProvider } from "next-auth/react";
 // import { type ThemeProviderProps } from "next-themes/dist/types";
 import React from "react";
 
+//NEXTUI STUFF
+
 // REACT QUERY STUFF
 const queryClient = new QueryClient();
 

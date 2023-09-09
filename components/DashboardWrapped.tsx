@@ -51,7 +51,7 @@ const DashboardWrapped = (props: Props) => {
 			<div>{userToken}</div>
 			<div>{isLoading ? "loading data pls wait" : "done!"}</div>
 			<h2>{session?.user.name} Top Songs</h2>
-			{data && data.items && (
+			{!isLoading && data && data.items && (
 				<ul>
 					{data.items.map((track, index) => (
 						<li key={index}>
