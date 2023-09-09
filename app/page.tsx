@@ -13,28 +13,22 @@ import { redirect, useRouter } from "next/navigation";
 export default async function Home() {
 	//REDIRECT IF LOGGED IN CAN TWEAK LATER
 	const session = await getAuthSession();
-	// if (session?.user) {
-	// 	return redirect("/dashboard");
-	// }
+	if (session?.user) {
+		return redirect("/dashboard");
+	}
 	// console.log(session.accessToken);
 
 	return (
-		<>
-			{/* <Navbar /> */}
-			<div className='flex items-center justify-center flex-col mt-20'>
-				<h1>Welcome to your Spotify Wrapped + AI</h1>
-				<h2>
-					Unleash the Power of AI for Personalized Playlists, Mood-Boosting
-					Beats, and Explore Your Spotify Wrapped Insights!
-				</h2>
-				<LogInForm />
-
-				{/* <LogInButton /> */}
-				{/* {session?.user ? <p>Hi {session.user.email}</p> : <p>please log in</p>} */}
-
-				{/* <p>{session.accessToken}</p> */}
-			</div>
-		</>
+		<div className='flex items-center justify-center flex-col mt-20'>
+			<h1 className='text-4xl font-bold mb-4 text-center'>
+				Welcome to Your Spotify Wrapped + AI
+			</h1>
+			<h2 className='text-lg text-center mb-8'>
+				Unleash the Power of AI for Personalized Playlists, Mood-Boosting Beats,
+				and Explore Your Spotify Wrapped Insights!
+			</h2>
+			<LogInForm />
+		</div>
 		// <>
 		// 	<div className='md:hidden'>
 		// 		<Image
