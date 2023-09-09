@@ -1,32 +1,26 @@
 // import LogIn from "@/components/LogInButton";
-import LogIn from "@/components/LogInButton";
+import LogInButton from "@/components/LogInButton";
 import { Button } from "@/components/ui/button";
+import { getAuthSession } from "@/lib/nextauth";
+import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { redirect, useRouter } from "next/navigation";
 
-export default function Home() {
-	// const router = useRouter();
-	// const clientID = process.env.CLIENT_ID;
-	// console.log(clientID);
+export default async function Home() {
+	//REDIRECT IF LOGGED IN CAN TWEAK LATER
+	const session = await getAuthSession();
+	// if (session?.user) {
+	// 	return redirect("/dashboard");
+	// }
 
-	// const params = new URLSearchParams();
-	// params.append("client_id", clientID);
-	// params.append("response_type", "code");
-	// params.append("redirect_uri", "http://localhost:3000/callback");
-	// params.append("scope", "user-read-private user-read-email ");
-
-	// const handleLogIn = (e: any) => {
-	// 	// e.preventDefault();
-	// 	// console.log("testing login stuff");
-	// 	// redirect(`https://accounts.spotify.com/authorize?${params.toString()}`);
-	// 	// router.push("/callback");
-	// 	window.location.href = `https://accounts.spotify.com/authorize?${params.toString()}`;
-	// };
 	return (
 		<>
-			<h1>WELCOME TO SPOTIFY STATS</h1>
-			<LogIn></LogIn>
-			{/* <Button onClick={handleLogIn}>LOG IN</Button> */}
+			<div className='flex items-center justify-center flex-col'>
+				<h1>WELCOME TO SPOTIFY STATS</h1>
+				<LogInButton />
+				{session?.user ? <p>Hi {session.user.email}</p> : <p>please log in</p>}
+				{/* <p>HI {session.user.email}</p> */}
+			</div>
 		</>
 	);
 }
