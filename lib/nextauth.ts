@@ -97,6 +97,7 @@ export const authOptions = {
 			//ACCESS TOKEN EXPIRED NEED TO REFRESH
 			return refreshAccessToken(token);
 		},
+		//ADDING ACCESSTOKEN TO SESSION
 		async session({ session, token, user }) {
 			// Send properties to the client, like an access_token from a provider.
 			session.accessToken = token.accessToken;

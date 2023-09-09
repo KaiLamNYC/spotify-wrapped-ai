@@ -12,6 +12,7 @@ export default async function Home() {
 	// if (session?.user) {
 	// 	return redirect("/dashboard");
 	// }
+	console.log(session.accessToken);
 
 	return (
 		<>
@@ -19,7 +20,7 @@ export default async function Home() {
 				<h1>WELCOME TO SPOTIFY STATS</h1>
 				<LogInButton />
 				{session?.user ? <p>Hi {session.user.email}</p> : <p>please log in</p>}
-				{/* <p>HI {session.user.email}</p> */}
+				<p>{session.accessToken}</p>
 			</div>
 		</>
 	);

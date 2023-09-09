@@ -1,12 +1,13 @@
 // import { useSession } from "next-auth/react";
 // "use client";
+import DashboardWrapped from "@/components/DashboardWrapped";
 import axios from "axios";
 import { useSession } from "next-auth/react";
 import React, { useState } from "react";
 
 type Props = {};
 
-const Dashboard = async (props: Props) => {
+const Dashboard = (props: Props) => {
 	// const [topTracks, setTopTracks] = useState([]);
 	// const { data: session } = useSession();
 
@@ -28,6 +29,7 @@ const Dashboard = async (props: Props) => {
 		<div>
 			<h1>DASHBOARD</h1>
 			{/* <p>{session.accessToken}</p> */}
+			<DashboardWrapped />
 		</div>
 	);
 };
