@@ -9,6 +9,7 @@ type Props = {};
 
 const DashboardWrapped = (props: Props) => {
 	const [userToken, setUserToken] = useState("");
+	const [userTopTracks, setUserTopTracks] = useState([]);
 	// const session = getAuthSession();
 	const { data: session } = useSession();
 	useEffect(() => {
@@ -27,8 +28,18 @@ const DashboardWrapped = (props: Props) => {
 				"https://api.spotify.com/v1/me/top/tracks?limit=5",
 				{ headers: authHeader }
 			);
+
+			setUserTopTracks(data.items);
 			return data;
 		},
+		// queryFn: async () => {
+		// 	const { data } = await axios.get(
+		// 		"https://jsonplaceholder.typicode.com/posts/1"
+		// 	);
+
+		// 	// setUserTopTracks(data.items);
+		// 	return data;
+		// },
 	});
 
 	// const { data, isLoading } = useQuery({
@@ -49,11 +60,11 @@ const DashboardWrapped = (props: Props) => {
 		<>
 			{/* <div>{session}</div> */}
 			<div>{userToken}</div>
-			<div>{isLoading ? "loading data pls wait" : "done!"}</div>
+			<div>{isLoading ? "loading data pls wait" : "done"}</div>
 			<h2>{session?.user.name} Top Songs</h2>
 			{!isLoading && data && data.items && (
 				<ul>
-					{data.items.map((track, index) => (
+					{userTopTracks.map((track, index) => (
 						<li key={index}>
 							<strong>{track.name}</strong> by {track.artists[0].name}
 						</li>
