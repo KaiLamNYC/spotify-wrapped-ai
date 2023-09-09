@@ -1,34 +1,23 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Spotify Wrapped + AI Project
 
-## Getting Started
+Welcome to the Spotify Wrapped + AI Project! This project aims to enhance your Spotify experience with personalized playlists, mood-boosting recommendations, and insights into your Spotify Wrapped.
 
-First, run the development server:
+## Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+### Completed Features
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- **Login with Spotify:** Connect your Spotify account to access personalized playlists and insights.
+- **Explore Spotify Wrapped:** Dive into your Spotify Wrapped insights, including top tracks, artists, and more.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### In Progress
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+- **User Dashboard:** Create a user dashboard for managing playlists, settings, and more.
 
-## Learn More
+### To-Do
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- **Custom Playlists:** Allow users to create and manage their custom playlists.
+- **Song Playback:** Enjoy your favorite tunes with seamless playback controls and cross-device support.
+- **Mood-Boosting Recommendations:** Discover mood-enhancing tracks based on your current state.
+- **AI-Powered Playlists:** Let AI curate playlists tailored to your music preferences.
+- **Enhanced AI Recommendations:** Improve AI recommendations with user feedback and interactions.
+- **User-Generated Feed:** Share, discover, and engage with AI-generated playlists in a user-friendly feed.
