@@ -27,6 +27,7 @@ const DashboardSavedPlaylists = ({ userToken }: Props) => {
 			console.log(data.data.items);
 			return data.data.items;
 		},
+		staleTime: 60000,
 	});
 
 	if (isLoading) {

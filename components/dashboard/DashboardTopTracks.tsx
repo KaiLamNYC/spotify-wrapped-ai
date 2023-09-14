@@ -27,6 +27,7 @@ const DashboardTopTracks = ({ userToken }: Props) => {
 			console.log(data.data.items);
 			return data.data.items;
 		},
+		staleTime: 60000,
 	});
 
 	//THIS USES CLIENT

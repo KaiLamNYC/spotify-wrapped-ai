@@ -3,6 +3,7 @@ import DashboardSavedPlaylists from "@/components/dashboard/DashboardSavedPlayli
 import DashboardTopArtists from "@/components/dashboard/DashboardTopArtists";
 import DashboardTopTracks from "@/components/dashboard/DashboardTopTracks";
 import LogOut from "@/components/LogOutButton";
+import { Avatar } from "@/components/ui/avatar";
 import { Card, CardHeader } from "@/components/ui/card";
 import axios from "axios";
 import { useSession } from "next-auth/react";
@@ -56,14 +57,21 @@ const Dashboard = (props: Props) => {
 			</div> */}
 
 			<div className='grid grid-cols-5 grid-rows-9 gap-4'>
-				<div className='col-span-5 row-span-2'>user profile</div>
+				<div className='col-span-5 row-span-2'>
+					<Avatar />
+				</div>
 				<div className='col-span-5 row-span-2 row-start-3'>
+					<h4>Top artists</h4>
 					<DashboardTopArtists userToken={userToken} />
 				</div>
 				<div className='col-span-5 row-span-3 row-start-5'>
+					<h4>Top tracks</h4>
+
 					<DashboardTopTracks userToken={userToken} />
 				</div>
 				<div className='col-span-5 row-span-2 row-start-8'>
+					<h4 className='text-xl bold'>Saved Playlists</h4>
+
 					<DashboardSavedPlaylists userToken={userToken} />
 				</div>
 			</div>

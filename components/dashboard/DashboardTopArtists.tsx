@@ -18,15 +18,16 @@ const DashboardTopArtists = ({ userToken }: Props) => {
 	};
 
 	const { data, isLoading, isError, error } = useQuery({
-		queryKey: ["tracks"],
+		queryKey: ["artists"],
 		queryFn: async () => {
 			const data = await axios.get(
-				"https://api.spotify.com/v1/me/top/tracks?limit=5",
+				"https://api.spotify.com/v1/me/top/artists?limit=5",
 				{ headers: authHeader }
 			);
 			console.log(data.data.items);
 			return data.data.items;
 		},
+		staleTime: 60000,
 	});
 
 	if (isLoading) {
@@ -38,10 +39,10 @@ const DashboardTopArtists = ({ userToken }: Props) => {
 
 	return (
 		<div className='grid grid-cols-5 gap-4'>
-			{data.map((track, index) => (
+			{data.map((artist, index) => (
 				<Card key={index}>
-					<CardTitle>{track.name}</CardTitle>
-					<CardContent>{track.artists[0].name}</CardContent>
+					<CardTitle>{artist.name}</CardTitle>
+					<CardContent>{artist.type}</CardContent>
 				</Card>
 			))}
 		</div>
