@@ -5,7 +5,8 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { useSession } from "next-auth/react";
 import React, { useEffect, useState } from "react";
-import { Card, CardContent, CardTitle } from "../ui/card";
+import { Avatar, AvatarImage } from "../ui/avatar";
+import { Card, CardContent, CardDescription, CardTitle } from "../ui/card";
 
 type Props = {
 	userToken: string;
@@ -24,7 +25,6 @@ const DashboardTopArtists = ({ userToken }: Props) => {
 				"https://api.spotify.com/v1/me/top/artists?limit=5",
 				{ headers: authHeader }
 			);
-			console.log(data.data.items);
 			return data.data.items;
 		},
 		staleTime: 60000,
@@ -40,9 +40,13 @@ const DashboardTopArtists = ({ userToken }: Props) => {
 	return (
 		<div className='grid grid-cols-5 gap-4'>
 			{data.map((artist, index) => (
-				<Card key={index}>
-					<CardTitle>{artist.name}</CardTitle>
-					<CardContent>{artist.type}</CardContent>
+				<Card key={index} className='flex flex-col items-center'>
+					<Avatar className='w-24 h-24 mt-2'>
+						<AvatarImage src={artist?.images[0].url} />
+					</Avatar>
+					<CardTitle className='text-lg'>{artist.name}</CardTitle>
+
+					<CardDescription>{artist.type}</CardDescription>
 				</Card>
 			))}
 		</div>

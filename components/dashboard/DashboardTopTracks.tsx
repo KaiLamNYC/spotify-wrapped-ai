@@ -3,9 +3,12 @@ import { getAuthSession } from "@/lib/nextauth";
 import { fetchUserTopTracks } from "@/lib/userActions";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
+import { Heart } from "lucide-react";
 import { useSession } from "next-auth/react";
+import Image from "next/image";
 import React, { useEffect, useState } from "react";
-import { Card, CardContent, CardTitle } from "../ui/card";
+import { Avatar, AvatarImage } from "../ui/avatar";
+import { Card, CardContent, CardDescription, CardTitle } from "../ui/card";
 
 type Props = {
 	userToken: string;
@@ -44,12 +47,37 @@ const DashboardTopTracks = ({ userToken }: Props) => {
 		return <span>Error fetching tracks {error.message}</span>;
 	}
 
+	function millisToMinutesAndSeconds(millis) {
+		var minutes = Math.floor(millis / 60000);
+		var seconds = ((millis % 60000) / 1000).toFixed(0);
+		return minutes + ":" + (seconds < 10 ? "0" : "") + seconds;
+	}
+
 	return (
-		<div className='className="grid grid-cols-1 grid-rows-5 gap-4'>
+		<div className='grid grid-cols-1 grid-rows-5 gap-2'>
 			{data.map((track, index) => (
-				<Card key={index}>
-					<CardTitle>{track.name}</CardTitle>
-					<CardContent>{track.artists[0].name}</CardContent>
+				<Card key={index} className='flex flex-row items-center'>
+					{/* <Avatar className='mr-2'>
+						<AvatarImage src={track?.album.images[0].url} />
+					</Avatar> */}
+					<CardDescription className=''>{index + 1}</CardDescription>
+					<Image
+						src={track?.album.images[0].url}
+						alt='album photo'
+						width={60}
+						height={60}
+						className='p-1'
+					/>
+					<CardTitle className='text-lg mr-12'>{track.name}</CardTitle>
+
+					<CardDescription className='mr-4'>
+						{track.artists[0].name}
+					</CardDescription>
+					<CardDescription className='mr-5'>{track.album.name}</CardDescription>
+					<Heart className='mr-5' />
+					<CardDescription className='mr-2'>
+						{millisToMinutesAndSeconds(track.duration_ms)}
+					</CardDescription>
 				</Card>
 			))}
 		</div>
