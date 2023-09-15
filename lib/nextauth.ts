@@ -126,14 +126,15 @@ export const authOptions = {
 		//ADDING ACCESSTOKEN TO SESSION
 		async session({ session, token, user }) {
 			// Send properties to the client, like an access_token from a provider.
-			if (token) {
-				//TAKING USER INFO FROM DATABASE AND PASSING IT TO TOKEN
-				// session.user.id = token.id;
-				session.user.name = token.name;
-				session.user.email = token.email;
-				session.user.image = token.picture;
-				session.accessToken = token.accessToken;
-			}
+			// if (token) {
+			// 	//TAKING USER INFO FROM DATABASE AND PASSING IT TO TOKEN
+			// 	// session.user.id = token.id;
+			// 	session.user.name = token.name;
+			// 	session.user.email = token.email;
+			// 	session.user.image = token.picture;
+			// 	session.accessToken = token.accessToken;
+			// }
+			session.accessToken = token.accessToken;
 
 			return session;
 		},
