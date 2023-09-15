@@ -2,23 +2,24 @@
 import Navbar from "@/components/Navbar";
 import TopArtists from "@/components/wrapped/TopArtists";
 import TopTracks from "@/components/wrapped/TopTracks";
+import { useSession } from "next-auth/react";
 
 import React from "react";
 
 type Props = {};
 
 const Wrapped = (props: Props) => {
+	const { data: session } = useSession();
 	return (
 		<div className='flex'>
 			<Navbar />
 
-			<div className='grid grid-cols-5 grid-rows-2 gap-1'>
-				<div className='col-span-5'>
+			<div className='flex flex-col items-center'>
+				<div>
 					<h2>TOP ARTISTS</h2>
-					<TopArtists />
+					<TopArtists userToken={session?.accessToken} />
 				</div>
-
-				<div className='col-span-5 row-start-2'>
+				<div>
 					<h2>TOP TRACKS</h2>
 					<TopTracks />
 				</div>

@@ -26,24 +26,6 @@ const Dashboard = (props: Props) => {
 	return (
 		<main className='p-4 flex flex-row'>
 			<Navbar session={session} />
-			{/* <div className='grid grid-cols-5 grid-rows-9 gap-1'>
-				<DashboardHeader session={session} />
-				<div className='col-span-5 row-span-2'></div>
-				<div className='col-span-5 row-span-2 row-start-3'>
-					<h4 className='text-xl'>Top artists of the year</h4>
-					<DashboardTopArtists userToken={userToken} />
-				</div>
-				<div className='col-span-5 row-span-3 row-start-5'>
-					{" "}
-					<h4 className='text-xl'>Top tracks of the year</h4>
-					<DashboardTopTracks userToken={userToken} />
-				</div>
-				<div className='col-span-5 row-span-2 row-start-8'>
-					<h4 className='text-xl bold'>Saved Playlists</h4>
-
-					<DashboardSavedPlaylists userToken={userToken} />
-				</div>
-			</div> */}
 
 			<div className='grid grid-cols-5 grid-rows-8 gap-1'>
 				<div className='col-span-5 row-span-2'>
