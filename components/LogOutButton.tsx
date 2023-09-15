@@ -4,7 +4,7 @@ import { getAuthSession } from "@/lib/nextauth";
 import { signIn, signOut, useSession } from "next-auth/react";
 import { Button } from "./ui/button";
 
-export default function LogOut() {
+export default function LogOutButton() {
 	const { data: session } = useSession();
 	// const user = getAuthSession();
 	// console.log(user);
@@ -19,12 +19,8 @@ export default function LogOut() {
 	// 	);
 	// }
 	return (
-		<>
-			<Button
-				onClick={() => signOut({ callbackUrl: "http://localhost:3000/" })}
-			>
-				Sign Out
-			</Button>
-		</>
+		<Button onClick={() => signOut({ callbackUrl: "http://localhost:3000/" })}>
+			Sign Out
+		</Button>
 	);
 }
