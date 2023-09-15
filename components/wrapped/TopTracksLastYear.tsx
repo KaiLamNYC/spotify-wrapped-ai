@@ -1,43 +1,36 @@
 "use client";
-
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
+
 import { Table, TableCell, TableRow } from "../ui/table";
 
 type Props = {
 	userToken: string;
 };
 
-const DashboardTopTracks = ({ userToken }: Props) => {
+const TopTracksLastYear = ({ userToken }: Props) => {
 	const [userTopTracks, setUserTopTracks] = useState([]);
 	const authHeader = {
 		Authorization: `Bearer ${userToken}`,
 	};
 
 	const { data, isLoading, isError, error } = useQuery({
-		queryKey: ["tracks"],
+		queryKey: ["topTracksLastYear"],
 		queryFn: async () => {
 			const data = await axios.get(
-				"https://api.spotify.com/v1/me/top/tracks?time_range=long_term&limit=5",
+				"https://api.spotify.com/v1/me/top/tracks?time_range=long_term&limit=10",
 				{ headers: authHeader }
 			);
 			console.log(data.data.items);
 			return data.data.items;
 		},
-		cacheTime: 24 * 60 * 60 * 1000 + 3000000,
+		cacheTime: 168 * 60 * 60 * 1000 + 3000000,
 
-		staleTime: 24 * 60 * 60 * 1000,
+		staleTime: 168 * 60 * 60 * 1000,
 	});
 
-	//THIS USES CLIENT
-	// https://next-auth.js.org/getting-started/client#usesession
-	// const { data: session } = useSession();
-
-	//THIS USES ASYNC ON SERVER SIDE
-	// https://next-auth.js.org/configuration/nextjs#getserversession
-	// console.log(session);
 	if (isLoading) {
 		return <div>Loading....</div>;
 	}
@@ -79,4 +72,4 @@ const DashboardTopTracks = ({ userToken }: Props) => {
 	);
 };
 
-export default DashboardTopTracks;
+export default TopTracksLastYear;

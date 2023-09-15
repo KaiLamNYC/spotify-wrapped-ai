@@ -1,9 +1,12 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import React from "react";
+import TopTracksLastMonth from "./TopTracksLastMonth";
+import TopTracksLastSixMonths from "./TopTracksLastSixMonths";
+import TopTracksLastYear from "./TopTracksLastYear";
 
-type Props = {};
+type Props = { userToken: string };
 
-const TopTracks = (props: Props) => {
+const TopTracks = ({ userToken }: Props) => {
 	return (
 		<Tabs defaultValue='last-month'>
 			<TabsList>
@@ -12,12 +15,15 @@ const TopTracks = (props: Props) => {
 
 				<TabsTrigger value='all-time'>ALL TIME</TabsTrigger>
 			</TabsList>
-			<TabsContent value='all-time'>
-				Make changes to your account here.
+
+			<TabsContent value='last-month'>
+				<TopTracksLastMonth userToken={userToken} />
 			</TabsContent>
-			<TabsContent value='last-month'>Change your password here.</TabsContent>
 			<TabsContent value='6-months'>
-				Make changes to your account here.
+				<TopTracksLastSixMonths userToken={userToken} />
+			</TabsContent>
+			<TabsContent value='all-time'>
+				<TopTracksLastYear userToken={userToken} />
 			</TabsContent>
 		</Tabs>
 	);

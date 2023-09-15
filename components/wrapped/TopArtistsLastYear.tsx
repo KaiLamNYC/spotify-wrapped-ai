@@ -1,33 +1,29 @@
-"use client";
-import { getAuthSession } from "@/lib/nextauth";
-import { fetchUserTopTracks } from "@/lib/userActions";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import { useSession } from "next-auth/react";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Avatar, AvatarImage } from "../ui/avatar";
-import { Card, CardContent, CardDescription, CardTitle } from "../ui/card";
+import { Card, CardDescription, CardTitle } from "../ui/card";
 
 type Props = {
 	userToken: string;
 };
 
-const DashboardTopArtists = ({ userToken }: Props) => {
+const TopArtistsLastYear = ({ userToken }: Props) => {
 	const authHeader = {
 		Authorization: `Bearer ${userToken}`,
 	};
 
 	const { data, isLoading, isError, error } = useQuery({
-		queryKey: ["artists"],
+		queryKey: ["topArtistLastYear"],
 		queryFn: async () => {
 			const data = await axios.get(
-				"https://api.spotify.com/v1/me/top/artists?time_range=long_term&limit=5",
+				"https://api.spotify.com/v1/me/top/artists?time_range=long_term&limit=10",
 				{ headers: authHeader }
 			);
 			return data.data.items;
 		},
-		cacheTime: 24 * 60 * 60 * 1000 + 3000000,
-		staleTime: 24 * 60 * 60 * 1000,
+		cacheTime: 168 * 60 * 60 * 1000 + 3000000,
+		staleTime: 168 * 60 * 60 * 1000,
 	});
 
 	if (isLoading) {
@@ -38,13 +34,15 @@ const DashboardTopArtists = ({ userToken }: Props) => {
 	}
 
 	return (
-		<div className='grid grid-cols-5 gap-4'>
+		<div className='flex flex-row flex-wrap'>
 			{data.map((artist, index) => (
-				<Card key={index} className='flex flex-col items-center'>
+				<Card key={index} className='flex items-center flex-col p-4 w-56'>
 					<Avatar className='w-24 h-24 mt-2'>
 						<AvatarImage src={artist?.images[0].url} />
 					</Avatar>
-					<CardTitle className='text-lg'>{artist.name}</CardTitle>
+					<CardTitle className='text-lg whitespace-normal'>
+						{artist.name}
+					</CardTitle>
 
 					<CardDescription>{artist.type}</CardDescription>
 				</Card>
@@ -53,4 +51,4 @@ const DashboardTopArtists = ({ userToken }: Props) => {
 	);
 };
 
-export default DashboardTopArtists;
+export default TopArtistsLastYear;

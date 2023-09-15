@@ -10,18 +10,19 @@ type Props = {};
 
 const Wrapped = (props: Props) => {
 	const { data: session } = useSession();
+	console.log(session);
 	return (
 		<div className='flex'>
 			<Navbar />
 
 			<div className='flex flex-col items-center'>
-				<div>
+				<div className='flex flex-col items-center'>
 					<h2>TOP ARTISTS</h2>
 					<TopArtists userToken={session?.accessToken} />
 				</div>
 				<div>
 					<h2>TOP TRACKS</h2>
-					<TopTracks />
+					<TopTracks userToken={session?.accessToken} />
 				</div>
 			</div>
 		</div>

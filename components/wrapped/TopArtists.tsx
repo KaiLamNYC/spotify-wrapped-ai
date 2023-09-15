@@ -1,6 +1,8 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import React from "react";
 import TopArtistsLastMonth from "./TopArtistsLastMonth";
+import TopArtistsLastSixMonths from "./TopArtistsLastSixMonths";
+import TopArtistsLastYear from "./TopArtistsLastYear";
 
 type Props = {
 	userToken: string;
@@ -9,21 +11,24 @@ type Props = {
 const TopArtists = ({ userToken }: Props) => {
 	return (
 		<Tabs defaultValue='last-month'>
-			<TabsList>
-				<TabsTrigger value='last-month'>LAST MONTH</TabsTrigger>
-				<TabsTrigger value='6-months'>6 MONTHS</TabsTrigger>
+			<div className='flex justify-center'>
+				<TabsList className=''>
+					<TabsTrigger value='last-month'>LAST MONTH</TabsTrigger>
+					<TabsTrigger value='6-months'>6 MONTHS</TabsTrigger>
 
-				<TabsTrigger value='all-time'>ALL TIME</TabsTrigger>
-			</TabsList>
+					<TabsTrigger value='all-time'>ALL TIME</TabsTrigger>
+				</TabsList>
+			</div>
 
 			<TabsContent value='last-month'>
 				<TopArtistsLastMonth userToken={userToken} />
 			</TabsContent>
+
 			<TabsContent value='6-months'>
-				Make changes to your account here.
+				<TopArtistsLastSixMonths userToken={userToken} />
 			</TabsContent>
 			<TabsContent value='all-time'>
-				Make changes to your account here.
+				<TopArtistsLastYear userToken={userToken} />
 			</TabsContent>
 		</Tabs>
 	);
