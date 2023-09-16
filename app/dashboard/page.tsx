@@ -42,7 +42,7 @@ const Dashboard = (props: Props) => {
 				<div className='col-span-5 row-span-2 row-start-7'>
 					<h4 className='text-xl bold'>Saved Playlists</h4>
 
-					<DashboardSavedPlaylists userToken={userToken} />
+					{/* <DashboardSavedPlaylists userToken={userToken} /> */}
 				</div>
 			</div>
 

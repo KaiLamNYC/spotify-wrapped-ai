@@ -8,7 +8,8 @@ import { SessionProvider } from "next-auth/react";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import React from "react";
 
-//NEXTUI STUFF
+//DARM MODE STUFF
+import { ThemeProvider } from "@/components/theme-provider";
 
 // REACT QUERY STUFF
 const queryClient = new QueryClient();
@@ -23,7 +24,11 @@ const Providers = ({
 }) => {
 	return (
 		<QueryClientProvider client={queryClient}>
-			<SessionProvider session={session}>{children}</SessionProvider>
+			<SessionProvider session={session}>
+				<ThemeProvider attribute='class' defaultTheme='dark' enableSystem>
+					{children}
+				</ThemeProvider>
+			</SessionProvider>
 			<ReactQueryDevtools initialIsOpen={false} />
 		</QueryClientProvider>
 	);
