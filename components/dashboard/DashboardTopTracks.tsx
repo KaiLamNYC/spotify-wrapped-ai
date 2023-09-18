@@ -9,7 +9,6 @@ import { Table, TableCell, TableRow } from "../ui/table";
 type Props = {
 	userToken: string;
 };
-
 const DashboardTopTracks = ({ userToken }: Props) => {
 	const [userTopTracks, setUserTopTracks] = useState([]);
 	const authHeader = {
@@ -26,6 +25,7 @@ const DashboardTopTracks = ({ userToken }: Props) => {
 			console.log(data.data.items);
 			return data.data.items;
 		},
+		retry: 10,
 		cacheTime: 24 * 60 * 60 * 1000 + 3000000,
 
 		staleTime: 24 * 60 * 60 * 1000,

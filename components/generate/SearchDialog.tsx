@@ -175,6 +175,7 @@ const SearchDialog = (props: Props) => {
 									<div>
 										<p>{track.name}</p>
 										<p>{track.artists[0].name}</p>
+										<p>{track.id}</p>
 									</div>
 
 									<Button>Add</Button>

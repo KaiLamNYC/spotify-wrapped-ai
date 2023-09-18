@@ -27,6 +27,7 @@ const DashboardSavedPlaylists = ({ userToken }: Props) => {
 			console.log(data.data.items);
 			return data.data.items;
 		},
+		retry: 10,
 		cacheTime: 24 * 60 * 60 * 1000 + 3000000,
 
 		staleTime: 24 * 60 * 60 * 1000,
