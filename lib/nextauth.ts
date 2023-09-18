@@ -39,24 +39,21 @@ const LOGIN_URL =
 async function refreshAccessToken(token) {
 	const params = new URLSearchParams();
 	params.append("grant_type", "refresh_token");
-	params.append("refresh_token", token.refreshToken); // Note the corrected spelling
-
-	const authHeader = {
-		Authorization: `Basic ${Buffer.from(
-			`${process.env.SPOTIFY_CLIENT_ID}:${process.env.SPOTIFY_CLIENT_SECRET}`
-		).toString("base64")}`,
-	};
-
-	//SHOULD WRAP IN TRY CATCH BUT OKAY FOR NOW
-	const response = await axios.post(
-		"https://accounts.spotify.com/api/token",
-		params,
-		{
-			headers: authHeader,
-		}
-	);
-	const data = response.data;
+	params.append("refresh_token", token.refreshToken);
+	const response = await fetch("https://accounts.spotify.com/api/token", {
+		method: "POST",
+		headers: {
+			Authorization:
+				"Basic " +
+				new Buffer.from(
+					process.env.SPOTIFY_CLIENT_ID + ":" + process.env.SPOTIFY_SECRET
+				).toString("base64"),
+		},
+		body: params,
+	});
+	const data = await response.json();
 	return {
+		...token,
 		accessToken: data.access_token,
 		//IF NO REFRESH TOKEN THEN JUST PASS SAME TOKEN AS BEFORE
 		refreshToken: data.refresh_token ?? token.refreshToken,
@@ -121,7 +118,7 @@ export const authOptions = {
 			}
 
 			//ACCESS TOKEN EXPIRED NEED TO REFRESH
-			return refreshAccessToken(token);
+			return await refreshAccessToken(token);
 		},
 		//ADDING ACCESSTOKEN TO SESSION
 		async session({ session, token, user }) {
