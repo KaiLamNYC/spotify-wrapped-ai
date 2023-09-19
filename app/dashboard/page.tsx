@@ -17,6 +17,9 @@ type Props = {};
 const Dashboard = (props: Props) => {
 	const [userToken, setUserToken] = useState("");
 	const { data: session } = useSession();
+	// if(!session?.accessToken){
+	// 	redirect('/')
+	// }
 
 	useEffect(() => {
 		if (session && session?.accessToken) {

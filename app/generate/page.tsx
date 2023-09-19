@@ -1,14 +1,24 @@
+"use client";
 import Navbar from "@/components/Navbar";
 import Songs from "@/components/generate/Songs";
 import { Button } from "@/components/ui/button";
 
 import { Input } from "@/components/ui/input";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import React from "react";
+import { useSession } from "next-auth/react";
+import React, { useEffect, useState } from "react";
 
 type Props = {};
 
 const GeneratePlaylists = (props: Props) => {
+	const { data: session } = useSession();
+
+	const [userToken, setUserToken] = useState("");
+	useEffect(() => {
+		if (session && session?.accessToken) {
+			setUserToken(session?.accessToken);
+		}
+	}, [session]);
 	return (
 		<div className='flex'>
 			<Navbar />
@@ -26,7 +36,7 @@ const GeneratePlaylists = (props: Props) => {
 						<Button>Generate</Button>
 					</TabsContent>
 					<TabsContent value='song'>
-						<Songs />
+						<Songs userToken={userToken} />
 					</TabsContent>
 					<TabsContent value='artist'>
 						<p>Generate a playlist based on an artist.</p>

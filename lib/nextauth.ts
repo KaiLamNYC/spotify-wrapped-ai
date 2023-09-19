@@ -37,28 +37,35 @@ const LOGIN_URL =
 	new URLSearchParams(params).toString();
 
 async function refreshAccessToken(token) {
-	const params = new URLSearchParams();
-	params.append("grant_type", "refresh_token");
-	params.append("refresh_token", token.refreshToken);
-	const response = await fetch("https://accounts.spotify.com/api/token", {
-		method: "POST",
-		headers: {
-			Authorization:
-				"Basic " +
-				new Buffer.from(
-					process.env.SPOTIFY_CLIENT_ID + ":" + process.env.SPOTIFY_SECRET
-				).toString("base64"),
-		},
-		body: params,
-	});
-	const data = await response.json();
-	return {
-		...token,
-		accessToken: data.access_token,
-		//IF NO REFRESH TOKEN THEN JUST PASS SAME TOKEN AS BEFORE
-		refreshToken: data.refresh_token ?? token.refreshToken,
-		accessTokenExpires: Date.now() + data.expires_in * 1000,
-	};
+	try {
+		const params = new URLSearchParams();
+		params.append("grant_type", "refresh_token");
+		params.append("refresh_token", token.refreshToken);
+		const response = await fetch("https://accounts.spotify.com/api/token", {
+			method: "POST",
+			headers: {
+				Authorization:
+					"Basic " +
+					new Buffer.from(
+						process.env.SPOTIFY_CLIENT_ID + ":" + process.env.SPOTIFY_SECRET
+					).toString("base64"),
+			},
+			body: params,
+		});
+		const data = await response.json();
+		return {
+			...token,
+			accessToken: data.access_token,
+			//IF NO REFRESH TOKEN THEN JUST PASS SAME TOKEN AS BEFORE
+			refreshToken: data.refresh_token ?? token.refreshToken,
+			accessTokenExpires: Date.now() + data.expires_in * 1000,
+		};
+	} catch (e) {
+		return {
+			...token,
+			error: "refresh access token error",
+		};
+	}
 }
 // async function refreshAccessToken(token) {
 // 	const params = new URLSearchParams();
@@ -114,23 +121,16 @@ export const authOptions = {
 			//ALREADY SIGNED IN
 			//CHECK ACCESS TOKEN IF EXPIRED
 			if (Date.now() < token.accessTokenExpires * 1000) {
+				console.log("existing access token is valid");
 				return token;
 			}
 
 			//ACCESS TOKEN EXPIRED NEED TO REFRESH
+			console.log("access token expired refreshing");
 			return await refreshAccessToken(token);
 		},
 		//ADDING ACCESSTOKEN TO SESSION
 		async session({ session, token, user }) {
-			// Send properties to the client, like an access_token from a provider.
-			// if (token) {
-			// 	//TAKING USER INFO FROM DATABASE AND PASSING IT TO TOKEN
-			// 	// session.user.id = token.id;
-			// 	session.user.name = token.name;
-			// 	session.user.email = token.email;
-			// 	session.user.image = token.picture;
-			// 	session.accessToken = token.accessToken;
-			// }
 			session.accessToken = token.accessToken;
 
 			return session;

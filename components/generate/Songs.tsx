@@ -25,9 +25,11 @@ import { ScrollArea } from "../ui/scroll-area";
 import { Separator } from "../ui/separator";
 import SearchDialog from "./SearchDialog";
 
-type Props = {};
+type Props = {
+	userToken: string;
+};
 
-const Songs = (props: Props) => {
+const Songs = ({ userToken }: Props) => {
 	const form = useForm();
 	const tags = Array.from({ length: 50 }).map(
 		(_, i, a) => `v1.2.0-beta.${a.length - i}`
@@ -66,7 +68,7 @@ const Songs = (props: Props) => {
 	return (
 		<div>
 			<p>Generate a playlist based on a song.</p>
-			<SearchDialog />
+			<SearchDialog userToken={userToken} />
 		</div>
 	);
 };

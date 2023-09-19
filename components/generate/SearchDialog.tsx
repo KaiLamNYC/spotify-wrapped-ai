@@ -17,9 +17,11 @@ import { Input } from "../ui/input";
 import { ScrollArea } from "../ui/scroll-area";
 import { Separator } from "../ui/separator";
 
-type Props = {};
+type Props = {
+	userToken: string;
+};
 
-const SearchDialog = (props: Props) => {
+const SearchDialog = ({ userToken }: Props) => {
 	const tags = Array.from({ length: 50 }).map(
 		(_, i, a) => `v1.2.0-beta.${a.length - i}`
 	);
@@ -102,7 +104,7 @@ const SearchDialog = (props: Props) => {
 				`https://api.spotify.com/v1/search?q=${encodedQuery}&type=track&limit=10`,
 				{
 					headers: {
-						Authorization: `Bearer ${session.accessToken}`,
+						Authorization: `Bearer ${userToken}`,
 					},
 				}
 			);
