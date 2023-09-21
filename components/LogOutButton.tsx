@@ -5,7 +5,7 @@ import { signIn, signOut, useSession } from "next-auth/react";
 import { Button } from "./ui/button";
 
 export default function LogOutButton() {
-	const { data: session } = useSession();
+	// const { data: session } = useSession();
 	// const user = getAuthSession();
 	// console.log(user);
 

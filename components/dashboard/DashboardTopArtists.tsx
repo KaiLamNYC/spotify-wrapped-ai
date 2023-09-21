@@ -1,6 +1,7 @@
 "use client";
 import { getAuthSession } from "@/lib/nextauth";
 // import { fetchUserTopTracks } from "@/lib/userActions";
+import useSpotify from "@/lib/useSpotify";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { useSession } from "next-auth/react";
@@ -8,13 +9,14 @@ import React, { useEffect, useState } from "react";
 import { Avatar, AvatarImage } from "../ui/avatar";
 import { Card, CardContent, CardDescription, CardTitle } from "../ui/card";
 
-type Props = {
-	userToken: string;
-};
+type Props = {};
 
-const DashboardTopArtists = ({ userToken }: Props) => {
+const DashboardTopArtists = (props: Props) => {
+	const { data: session, status } = useSession();
+	// const spotifyApi = useSpotify();
+	// const [topArtists, setTopArtists] = useState([]);
 	const authHeader = {
-		Authorization: `Bearer ${userToken}`,
+		Authorization: `Bearer ${session?.user.accessToken}`,
 	};
 
 	const { data, isLoading, isError, error } = useQuery({
@@ -40,6 +42,7 @@ const DashboardTopArtists = ({ userToken }: Props) => {
 
 	return (
 		<div className='grid grid-cols-5 gap-4'>
+			HELLO THERE
 			{data.map((artist, index) => (
 				<Card key={index} className='flex flex-col items-center'>
 					<Avatar className='w-24 h-24 mt-2'>

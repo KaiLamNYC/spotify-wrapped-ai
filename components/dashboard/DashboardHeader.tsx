@@ -1,19 +1,14 @@
+"use client";
+import { useSession } from "next-auth/react";
 import Image from "next/image";
 import React from "react";
 import LogOutButton from "../LogOutButton";
 import { Avatar, AvatarImage } from "../ui/avatar";
 
-type Props = {
-	session: {
-		user: {
-			name: string;
-			image: string;
-			email: string;
-		};
-	};
-};
+type Props = {};
 
-const DashboardHeader = ({ session }: any) => {
+const DashboardHeader = (props: Props) => {
+	const { data: session } = useSession();
 	return (
 		<div className='flex'>
 			<Avatar>

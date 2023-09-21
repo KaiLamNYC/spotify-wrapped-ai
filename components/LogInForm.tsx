@@ -18,9 +18,9 @@ type Props = {};
 
 const LogInForm = (props: Props) => {
 	return (
-		<Card className='bg-white shadow-lg rounded-lg p-6 w-72'>
+		<Card className=' shadow-lg rounded-lg p-6 w-72'>
 			<CardHeader className='space-y-1'>
-				<CardTitle className='text-2xl font-semibold'>
+				<CardTitle className='text-2xl font-semibold '>
 					Log In With Spotify
 				</CardTitle>
 				<CardDescription>
