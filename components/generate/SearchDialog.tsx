@@ -12,91 +12,26 @@ import {
 import { useSession } from "next-auth/react";
 import React, { useState } from "react";
 
+import useSpotify from "@/lib/useSpotify";
 import axios from "axios";
 import { Input } from "../ui/input";
 import { ScrollArea } from "../ui/scroll-area";
 import { Separator } from "../ui/separator";
 
-type Props = {
-	userToken: string;
-};
+type Props = {};
 
-const SearchDialog = ({ userToken }: Props) => {
-	const tags = Array.from({ length: 50 }).map(
-		(_, i, a) => `v1.2.0-beta.${a.length - i}`
-	);
-
-	const testSongs1 = [
-		{
-			name: "hello",
-		},
-		{
-			name: "this",
-		},
-		{
-			name: "is",
-		},
-		{
-			name: "test",
-		},
-		{
-			name: "hello",
-		},
-		{
-			name: "this",
-		},
-		{
-			name: "is",
-		},
-		{
-			name: "test",
-		},
-		{
-			name: "hello",
-		},
-		{
-			name: "this",
-		},
-		{
-			name: "is",
-		},
-		{
-			name: "test",
-		},
-		{
-			name: "hello",
-		},
-		{
-			name: "this",
-		},
-		{
-			name: "is",
-		},
-		{
-			name: "test",
-		},
-		{
-			name: "hello",
-		},
-		{
-			name: "this",
-		},
-		{
-			name: "is",
-		},
-		{
-			name: "test",
-		},
-	];
-
+const SearchDialog = (props: Props) => {
 	const [searchSongs, setSearchSongs] = useState<{ name: string }[]>([]);
 
 	const [searchData, setSearchData] = useState();
 	const { data: session } = useSession();
+	const spotifyApi = useSpotify();
+	// console.log(`this is accesstoken: ${session?.user.accessToken}`);
+	// console.log("The access token is " + spotifyApi.getAccessToken());
 
 	const [searchInput, setSearchInput] = useState("");
 
-	async function updateSearchResults(query: string, accessToken: string) {
+	async function updateSearchResults(query: string) {
 		const encodedQuery = encodeURIComponent(query);
 
 		try {
@@ -104,7 +39,7 @@ const SearchDialog = ({ userToken }: Props) => {
 				`https://api.spotify.com/v1/search?q=${encodedQuery}&type=track&limit=10`,
 				{
 					headers: {
-						Authorization: `Bearer ${userToken}`,
+						Authorization: `Bearer ${spotifyApi.getAccessToken().toString()}`,
 					},
 				}
 			);
@@ -139,7 +74,7 @@ const SearchDialog = ({ userToken }: Props) => {
 						console.log(session?.accessToken);
 						// setSearchSongs(testSongs1);
 						// console.log(searchInput);
-						await updateSearchResults(searchInput, session.accessToken);
+						await updateSearchResults(searchInput);
 						// console.log("finished sending");
 						console.log(searchData);
 					}}

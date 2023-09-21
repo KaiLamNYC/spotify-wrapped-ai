@@ -88,19 +88,19 @@ export const authOptions = {
 			// Persist the OAuth access_token to the token right after signin
 
 			//SIGN IN FOR THE FIRST TIME
-			if (account && user) {
+			if (account) {
 				return {
 					...token,
-					accessToken: account.accessToken,
+					accessToken: account.access_token,
 					refreshToken: account.refresh_token,
 					username: account.providerAccountId,
-					accessTokenExpires: Date.now() + account.expires_in * 1000,
+					accessTokenExpires: Date.now() + account.expires_at * 1000,
 				};
 			}
 
 			// ALREADY LOGGED IN
 			//Return previous token if the access token has not expired yet
-			if (Date.now() < token.accessTokenExpires * 1000) {
+			if (Date.now() < token.accessTokenExpires) {
 				console.log("existing access token is valid");
 				return token;
 			}
@@ -112,8 +112,8 @@ export const authOptions = {
 		//ADDING ACCESSTOKEN TO SESSION
 		async session({ session, token }) {
 			session.user.accessToken = token.accessToken;
-			session.user.refreshToken = token.refreshToken;
-			session.user.username = token.username;
+			// session.user.refreshToken = token.refreshToken;
+			// session.user.username = token.username;
 
 			return session;
 		},

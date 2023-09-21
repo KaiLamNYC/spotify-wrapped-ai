@@ -1,3 +1,4 @@
+"use client";
 import DashboardHeader from "@/components/dashboard/DashboardHeader";
 import DashboardSavedPlaylists from "@/components/dashboard/DashboardSavedPlaylists";
 import DashboardTopArtists from "@/components/dashboard/DashboardTopArtists";
@@ -8,6 +9,7 @@ import PlaybackFooter from "@/components/PlaybackFooter";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { Card, CardHeader } from "@/components/ui/card";
 import { getAuthSession } from "@/lib/nextauth";
+import useSpotify from "@/lib/useSpotify";
 import axios from "axios";
 import { useSession } from "next-auth/react";
 import React, { useEffect, useState } from "react";
@@ -21,7 +23,16 @@ const Dashboard = (props: Props) => {
 	// console.log(session);
 	// if(!session?.accessToken){
 	// 	redirect('/')
+	// const spotifyApi = useSpotify();
+	// console.log("The refresh token is " + spotifyApi.getRefreshToken());
 	// }
+	// const { data: session } = useSession();
+	// useEffect(() => {
+	// 	if (session && session?.accessToken) {
+	// 		setUserToken(session?.accessToken);
+	// 	}
+	// }, [session]);
+	// console.log(`this is token pls: ${spotifyApi.getAccessToken()}`);
 
 	return (
 		<main className='p-4 flex flex-row'>
