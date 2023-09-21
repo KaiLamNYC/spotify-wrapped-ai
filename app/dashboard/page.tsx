@@ -48,7 +48,7 @@ const Dashboard = (props: Props) => {
 				</div>
 				<div className='col-span-5 row-span-2 row-start-5'>
 					<h4 className='text-xl'>Top tracks of the year</h4>
-					{/* <DashboardTopTracks userToken={session?.user?.accessToken} /> */}
+					<DashboardTopTracks />
 				</div>
 				<div className='col-span-5 row-span-2 row-start-7'>
 					<h4 className='text-xl bold'>Saved Playlists</h4>

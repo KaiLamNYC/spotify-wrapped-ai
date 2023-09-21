@@ -4,16 +4,17 @@ import axios from "axios";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 
+import { useSession } from "next-auth/react";
 import { Table, TableCell, TableRow } from "../ui/table";
 
-type Props = {
-	userToken: string;
-};
+type Props = {};
 
-const TopTracksLastSixMonths = ({ userToken }: Props) => {
+const TopTracksLastSixMonths = (props: Props) => {
+	const { data: session } = useSession();
+
 	const [userTopTracks, setUserTopTracks] = useState([]);
 	const authHeader = {
-		Authorization: `Bearer ${userToken}`,
+		Authorization: `Bearer ${session?.user?.accessToken}`,
 	};
 
 	const { data, isLoading, isError, error } = useQuery({
@@ -27,6 +28,7 @@ const TopTracksLastSixMonths = ({ userToken }: Props) => {
 			return data.data.items;
 		},
 		cacheTime: 168 * 60 * 60 * 1000 + 3000000,
+		retry: 10,
 
 		staleTime: 168 * 60 * 60 * 1000,
 	});

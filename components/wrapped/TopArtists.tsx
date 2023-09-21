@@ -1,14 +1,13 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { useSession } from "next-auth/react";
 import React from "react";
 import TopArtistsLastMonth from "./TopArtistsLastMonth";
 import TopArtistsLastSixMonths from "./TopArtistsLastSixMonths";
 import TopArtistsLastYear from "./TopArtistsLastYear";
 
-type Props = {
-	userToken: string;
-};
+type Props = {};
 
-const TopArtists = ({ userToken }: Props) => {
+const TopArtists = (props: Props) => {
 	return (
 		<Tabs defaultValue='last-month'>
 			<div className='flex justify-center'>
@@ -21,14 +20,14 @@ const TopArtists = ({ userToken }: Props) => {
 			</div>
 
 			<TabsContent value='last-month'>
-				<TopArtistsLastMonth userToken={userToken} />
+				<TopArtistsLastMonth />
 			</TabsContent>
 
 			<TabsContent value='6-months'>
-				<TopArtistsLastSixMonths userToken={userToken} />
+				<TopArtistsLastSixMonths />
 			</TabsContent>
 			<TabsContent value='all-time'>
-				<TopArtistsLastYear userToken={userToken} />
+				<TopArtistsLastYear />
 			</TabsContent>
 		</Tabs>
 	);

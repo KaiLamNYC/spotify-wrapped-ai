@@ -1,16 +1,19 @@
+"use client";
+
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
+import { useSession } from "next-auth/react";
 import React from "react";
 import { Avatar, AvatarImage } from "../ui/avatar";
 import { Card, CardDescription, CardTitle } from "../ui/card";
 
-type Props = {
-	userToken: string;
-};
+type Props = {};
 
-const TopArtistsLastSixMonths = ({ userToken }: Props) => {
+const TopArtistsLastSixMonths = (props: Props) => {
+	const { data: session } = useSession();
+
 	const authHeader = {
-		Authorization: `Bearer ${userToken}`,
+		Authorization: `Bearer ${session?.user?.accessToken}`,
 	};
 
 	const { data, isLoading, isError, error } = useQuery({
@@ -23,6 +26,8 @@ const TopArtistsLastSixMonths = ({ userToken }: Props) => {
 			return data.data.items;
 		},
 		cacheTime: 168 * 60 * 60 * 1000 + 3000000,
+		retry: 10,
+
 		staleTime: 168 * 60 * 60 * 1000,
 	});
 

@@ -4,9 +4,9 @@ import TopTracksLastMonth from "./TopTracksLastMonth";
 import TopTracksLastSixMonths from "./TopTracksLastSixMonths";
 import TopTracksLastYear from "./TopTracksLastYear";
 
-type Props = { userToken: string };
+type Props = {};
 
-const TopTracks = ({ userToken }: Props) => {
+const TopTracks = (props: Props) => {
 	return (
 		<Tabs defaultValue='last-month'>
 			<TabsList>
@@ -17,13 +17,13 @@ const TopTracks = ({ userToken }: Props) => {
 			</TabsList>
 
 			<TabsContent value='last-month'>
-				<TopTracksLastMonth userToken={userToken} />
+				<TopTracksLastMonth />
 			</TabsContent>
 			<TabsContent value='6-months'>
-				<TopTracksLastSixMonths userToken={userToken} />
+				<TopTracksLastSixMonths />
 			</TabsContent>
 			<TabsContent value='all-time'>
-				<TopTracksLastYear userToken={userToken} />
+				<TopTracksLastYear />
 			</TabsContent>
 		</Tabs>
 	);

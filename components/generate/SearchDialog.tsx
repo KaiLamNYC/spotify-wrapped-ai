@@ -71,12 +71,12 @@ const SearchDialog = (props: Props) => {
 				/>
 				<Button
 					onClick={async () => {
-						console.log(session?.accessToken);
+						// console.log(session?.accessToken);
 						// setSearchSongs(testSongs1);
 						// console.log(searchInput);
 						await updateSearchResults(searchInput);
 						// console.log("finished sending");
-						console.log(searchData);
+						// console.log(searchData);
 					}}
 				>
 					Search
@@ -84,27 +84,6 @@ const SearchDialog = (props: Props) => {
 				<ScrollArea className='h-72 w-full rounded-md border'>
 					<div className='p-4'>
 						<h4 className='mb-4 text-sm font-medium leading-none'>SONGS</h4>
-						{/* {tags.map((tag) => (
-								<>
-									<div key={tag} className='text-sm flex justify-between'>
-										<div>
-											<p>{tag}</p>
-											<p>artist</p>
-										</div>
-
-										<Button>Add</Button>
-									</div>
-									<Separator className='my-2' />
-								</>
-							))} */}
-
-						{/* {searchSongs.map((track, index) => (
-							<>
-								<div key={index}>
-									<p>{track.name}</p>
-								</div>
-							</>
-						))} */}
 
 						{searchData?.items.map((track, index) => (
 							<>

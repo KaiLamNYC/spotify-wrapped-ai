@@ -1,4 +1,4 @@
-"use client";
+// "use client";
 import Navbar from "@/components/Navbar";
 import TopArtists from "@/components/wrapped/TopArtists";
 import TopTracks from "@/components/wrapped/TopTracks";
@@ -9,13 +9,9 @@ import React, { useEffect, useState } from "react";
 type Props = {};
 
 const Wrapped = (props: Props) => {
-	const { data: session } = useSession();
-	const [userToken, setUserToken] = useState("");
-	useEffect(() => {
-		if (session && session?.accessToken) {
-			setUserToken(session?.accessToken);
-		}
-	}, [session]);
+	// const { data: session } = useSession();
+	// const [userToken, setUserToken] = useState("");
+
 	return (
 		<div className='flex'>
 			<Navbar />
@@ -23,11 +19,11 @@ const Wrapped = (props: Props) => {
 			<div className='flex flex-col items-center'>
 				<div className='flex flex-col items-center'>
 					<h2>TOP ARTISTS</h2>
-					<TopArtists userToken={userToken} />
+					<TopArtists />
 				</div>
 				<div>
 					<h2>TOP TRACKS</h2>
-					<TopTracks userToken={userToken} />
+					<TopTracks />
 				</div>
 			</div>
 		</div>

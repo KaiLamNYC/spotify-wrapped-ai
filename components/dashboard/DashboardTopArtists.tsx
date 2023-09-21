@@ -13,8 +13,9 @@ type Props = {};
 
 const DashboardTopArtists = (props: Props) => {
 	const { data: session, status } = useSession();
-	// const spotifyApi = useSpotify();
+	const spotifyApi = useSpotify();
 	// const [topArtists, setTopArtists] = useState([]);
+	console.log(spotifyApi.getAccessToken());
 	const authHeader = {
 		Authorization: `Bearer ${session?.user.accessToken}`,
 	};
@@ -42,7 +43,6 @@ const DashboardTopArtists = (props: Props) => {
 
 	return (
 		<div className='grid grid-cols-5 gap-4'>
-			HELLO THERE
 			{data.map((artist, index) => (
 				<Card key={index} className='flex flex-col items-center'>
 					<Avatar className='w-24 h-24 mt-2'>
