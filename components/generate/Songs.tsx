@@ -29,11 +29,16 @@ type Props = {};
 
 const Songs = (props: Props) => {
 	const form = useForm();
+	const [seedSongs, setSeedSongs] = useState([]);
 
 	return (
 		<div>
 			<p>Generate a playlist based on a song.</p>
-			<SearchDialog />
+			{/* <p>test</p> */}
+			{seedSongs.map((song, index) => (
+				<p key={index}>{song}</p>
+			))}
+			<SearchDialog setSeedSongs={setSeedSongs} seedSongs={seedSongs} />
 		</div>
 	);
 };

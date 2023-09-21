@@ -18,9 +18,9 @@ import { Input } from "../ui/input";
 import { ScrollArea } from "../ui/scroll-area";
 import { Separator } from "../ui/separator";
 
-type Props = {};
+// type Props = { setSeedSongs };
 
-const SearchDialog = (props: Props) => {
+const SearchDialog = ({ setSeedSongs, seedSongs }: any) => {
 	const [searchSongs, setSearchSongs] = useState<{ name: string }[]>([]);
 
 	const [searchData, setSearchData] = useState();
@@ -94,7 +94,14 @@ const SearchDialog = (props: Props) => {
 										<p>{track.id}</p>
 									</div>
 
-									<Button>Add</Button>
+									<Button
+										onClick={async () => {
+											console.log("clicked");
+											setSeedSongs([...seedSongs, track.name]);
+										}}
+									>
+										Add
+									</Button>
 								</div>
 								<Separator className='my-2' />
 							</>
