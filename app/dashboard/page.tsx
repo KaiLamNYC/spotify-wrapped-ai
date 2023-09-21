@@ -1,4 +1,3 @@
-"use client";
 import DashboardHeader from "@/components/dashboard/DashboardHeader";
 import DashboardSavedPlaylists from "@/components/dashboard/DashboardSavedPlaylists";
 import DashboardTopArtists from "@/components/dashboard/DashboardTopArtists";
