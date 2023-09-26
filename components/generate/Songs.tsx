@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/dialog";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
+import TestCard from "../TestCard";
 import {
 	Form,
 	FormControl,
@@ -39,6 +40,7 @@ const Songs = (props: Props) => {
 				<p key={index}>{song}</p>
 			))}
 			<SearchDialog setSeedSongs={setSeedSongs} seedSongs={seedSongs} />
+			<TestCard />
 		</div>
 	);
 };
