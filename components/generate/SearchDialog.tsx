@@ -26,8 +26,8 @@ const SearchDialog = ({ setSeedSongs, seedSongs }: any) => {
 	const [searchData, setSearchData] = useState();
 	const { data: session } = useSession();
 	const spotifyApi = useSpotify();
-	console.log(`this is accesstoken: ${session?.user.accessToken}`);
-	console.log("The access token is " + spotifyApi.getAccessToken());
+	// console.log(`this is accesstoken: ${session?.user.accessToken}`);
+	// console.log("The access token is " + spotifyApi.getAccessToken());
 
 	const [searchInput, setSearchInput] = useState("");
 
@@ -39,7 +39,7 @@ const SearchDialog = ({ setSeedSongs, seedSongs }: any) => {
 				`https://api.spotify.com/v1/search?q=${encodedQuery}&type=track&limit=10`,
 				{
 					headers: {
-						Authorization: `Bearer ${spotifyApi.getAccessToken().toString()}`,
+						Authorization: `Bearer ${session?.user.accessToken}`,
 					},
 				}
 			);
@@ -83,7 +83,7 @@ const SearchDialog = ({ setSeedSongs, seedSongs }: any) => {
 				/>
 				<Button
 					onClick={async () => {
-						// console.log(session?.accessToken);
+						console.log(session);
 						// setSearchSongs(testSongs1);
 						await updateSearchResults(searchInput);
 						// await testStuff();

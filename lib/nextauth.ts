@@ -26,8 +26,35 @@ async function refreshAccessToken(token) {
 		spotifyApi.setRefreshToken(token.refreshToken);
 
 		//GETTING BACK NEW ACCESS TOKEN
-		const { body: refreshedToken } = await spotifyApi.refreshAccessToken();
-		console.log("refershed token", refreshedToken);
+		// const { body: refreshedToken } = await spotifyApi.refreshAccessToken();
+		// console.log("refershed token", refreshedToken);
+		const body = {
+			grant_type: "refresh_token",
+			refresh_token: token.refreshToken,
+		};
+		let refreshedToken = {};
+		const response = await axios
+			.post("https://accounts.spotify.com/api/token", body, {
+				headers: {
+					"Content-Type": "application/x-www-form-urlencoded",
+					Authorization:
+						"Basic " +
+						Buffer.from(
+							process.env.SPOTIFY_CLIENT_ID +
+								":" +
+								process.env.SPOTIFY_CLIENT_SECRET
+						).toString("base64"),
+				},
+			})
+			.then((response) => {
+				if (response.status === 200) {
+					refreshedToken = response.data;
+				}
+			})
+			.catch((error) => {
+				// Handle any errors here
+				console.error(error);
+			});
 
 		return {
 			...token,
@@ -94,13 +121,13 @@ export const authOptions = {
 					accessToken: account.access_token,
 					refreshToken: account.refresh_token,
 					username: account.providerAccountId,
-					accessTokenExpires: account.expires_at,
+					accessTokenExpires: account.expires_at * 1000,
 				};
 			}
 
 			// ALREADY LOGGED IN
 			//Return previous token if the access token has not expired yet
-			if (Date.now() < token.accessTokenExpires * 1000) {
+			if (Date.now() < token.accessTokenExpires) {
 				console.log(`existing token is valid: ${token.accessTokenExpires}`);
 				return token;
 			}

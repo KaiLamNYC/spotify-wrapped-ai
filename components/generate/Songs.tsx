@@ -1,4 +1,5 @@
 "use client";
+import { playlistGenerateSchema } from "@/app/schemas/form/generate";
 import { Button } from "@/components/ui/button";
 import {
 	Dialog,
@@ -9,8 +10,10 @@ import {
 	DialogTitle,
 	DialogTrigger,
 } from "@/components/ui/dialog";
+import { zodResolver } from "@hookform/resolvers/zod";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
+import { z } from "zod";
 import TestCard from "../TestCard";
 import {
 	Form,
@@ -28,10 +31,24 @@ import SearchDialog from "./SearchDialog";
 
 type Props = {};
 
+type Input = z.infer<typeof playlistGenerateSchema>;
+
 const Songs = (props: Props) => {
-	const form = useForm();
+	const form = useForm<Input>({
+		resolver: zodResolver(playlistGenerateSchema),
+		defaultValues: {
+			seeds: "",
+		},
+	});
 	const [seedSongs, setSeedSongs] = useState([]);
 
+	function onSubmit(values: z.infer<typeof playlistGenerateSchema>) {
+		// Do something with the form values.
+		// ✅ This will be type-safe and validated.
+		console.log(values);
+	}
+
+	form.watch();
 	return (
 		<div>
 			<p>Generate a playlist based on a song.</p>
@@ -40,7 +57,27 @@ const Songs = (props: Props) => {
 				<p key={index}>{song}</p>
 			))}
 			<SearchDialog setSeedSongs={setSeedSongs} seedSongs={seedSongs} />
-			{/* <TestCard /> */}
+			<Form {...form}>
+				<form onSubmit={form.handleSubmit(onSubmit)} className='space-y-8'>
+					<FormField
+						control={form.control}
+						name='seeds'
+						render={({ field }) => (
+							<FormItem>
+								<FormLabel>Username</FormLabel>
+								<FormControl>
+									<Input placeholder='shadcn' {...field} />
+								</FormControl>
+								<FormDescription>
+									This is your public display name.
+								</FormDescription>
+								<FormMessage />
+							</FormItem>
+						)}
+					/>
+					<Button type='submit'>Submit</Button>
+				</form>
+			</Form>
 		</div>
 	);
 };
