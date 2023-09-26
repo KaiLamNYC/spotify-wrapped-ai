@@ -12,8 +12,9 @@ import {
 import { useSession } from "next-auth/react";
 import React, { useState } from "react";
 
-import useSpotify from "@/lib/useSpotify";
+// import useSpotify from "@/lib/useSpotify";
 import axios from "axios";
+import { Form } from "react-hook-form";
 import { Input } from "../ui/input";
 import { ScrollArea } from "../ui/scroll-area";
 import { Separator } from "../ui/separator";
@@ -25,7 +26,7 @@ const SearchDialog = ({ setSeedSongs, seedSongs }: any) => {
 
 	const [searchData, setSearchData] = useState();
 	const { data: session } = useSession();
-	const spotifyApi = useSpotify();
+	// const spotifyApi = useSpotify();
 	// console.log(`this is accesstoken: ${session?.user.accessToken}`);
 	// console.log("The access token is " + spotifyApi.getAccessToken());
 
@@ -47,18 +48,6 @@ const SearchDialog = ({ setSeedSongs, seedSongs }: any) => {
 		} catch (error) {
 			// Handle any errors here
 			console.error("Error fetching search results:", error);
-		}
-	}
-
-	async function testStuff() {
-		try {
-			const response = await axios.get(
-				"https://jsonplaceholder.typicode.com/posts/1"
-			);
-
-			console.log(response);
-		} catch (e) {
-			console.error("Error fetching test results:", e);
 		}
 	}
 
@@ -107,6 +96,8 @@ const SearchDialog = ({ setSeedSongs, seedSongs }: any) => {
 									<Button
 										onClick={async () => {
 											console.log("clicked");
+											// form.setValue("seeds", seedSongs[0]);
+
 											setSeedSongs([...seedSongs, track.name]);
 											// updateSearchResults(searchInput);
 										}}

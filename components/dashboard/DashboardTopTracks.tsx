@@ -1,6 +1,6 @@
 "use client";
 
-import useSpotify from "@/lib/useSpotify";
+// import useSpotify from "@/lib/useSpotify";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { useSession } from "next-auth/react";
@@ -11,7 +11,7 @@ import { Table, TableCell, TableRow } from "../ui/table";
 type Props = {};
 const DashboardTopTracks = (props: Props) => {
 	// const [userTopTracks, setUserTopTracks] = useState([]);
-	const spotifyApi = useSpotify();
+	// const spotifyApi = useSpotify();
 	const { data: session, status } = useSession();
 
 	const authHeader = {

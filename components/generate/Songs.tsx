@@ -11,6 +11,8 @@ import {
 	DialogTrigger,
 } from "@/components/ui/dialog";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useMutation } from "@tanstack/react-query";
+import axios from "axios";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -34,13 +36,25 @@ type Props = {};
 type Input = z.infer<typeof playlistGenerateSchema>;
 
 const Songs = (props: Props) => {
+	const [seedSongs, setSeedSongs] = useState([]);
+
 	const form = useForm<Input>({
 		resolver: zodResolver(playlistGenerateSchema),
+		// CAN JUST SET DEFAULT VALUE TO RANDOM POPULAR ARTIST
 		defaultValues: {
 			seeds: "",
 		},
 	});
-	const [seedSongs, setSeedSongs] = useState([]);
+
+	const { mutate: generatePlaylist, isLoading } = useMutation({
+		//THIS IS THE FUNCTION THAT MUTATES THE DATA IN OUR DATABASE
+		mutationFn: async ({ seeds }: Input) => {
+			//THIS ENDPOINT CREATES THE GAME AND THE QUESTIONS
+			const response = await axios.post("/api/game", { seeds });
+			//RETURNING THE GAMEID TO REDIRECT
+			return response.data;
+		},
+	});
 
 	function onSubmit(values: z.infer<typeof playlistGenerateSchema>) {
 		// Do something with the form values.
@@ -48,7 +62,12 @@ const Songs = (props: Props) => {
 		console.log(values);
 	}
 
+	const setValues = () => {
+		form.setValue("seeds", seedSongs[0]);
+	};
 	form.watch();
+
+	// form.handleSubmit(onSubmit)
 	return (
 		<div>
 			<p>Generate a playlist based on a song.</p>
@@ -56,26 +75,43 @@ const Songs = (props: Props) => {
 			{seedSongs.map((song, index) => (
 				<p key={index}>{song}</p>
 			))}
-			<SearchDialog setSeedSongs={setSeedSongs} seedSongs={seedSongs} />
+
+			{/* <SearchDialog setSeedSongs={setSeedSongs} seedSongs={seedSongs} /> */}
 			<Form {...form}>
 				<form onSubmit={form.handleSubmit(onSubmit)} className='space-y-8'>
+					<SearchDialog setSeedSongs={setSeedSongs} seedSongs={seedSongs} />
+
 					<FormField
 						control={form.control}
 						name='seeds'
 						render={({ field }) => (
 							<FormItem>
-								<FormLabel>Username</FormLabel>
+								<FormLabel>SEED SONGS</FormLabel>
 								<FormControl>
-									<Input placeholder='shadcn' {...field} />
+									<Input
+										placeholder='hello'
+										{...field}
+										// onChange={(e) => {
+										// 	form.setValue("seeds", e.target.value);
+										// }}
+										value={seedSongs[0]}
+									/>
 								</FormControl>
+
 								<FormDescription>
-									This is your public display name.
+									{/* {seedSongs.map((song, index) => (
+										<p key={index}>{song}</p>
+									))} */}
+									DESCRIPTION
 								</FormDescription>
 								<FormMessage />
 							</FormItem>
 						)}
 					/>
-					<Button type='submit'>Submit</Button>
+					<Button type='button' onClick={setValues}>
+						CONFIRM SONGS
+					</Button>
+					<Button type='submit'>GENERATE</Button>
 				</form>
 			</Form>
 		</div>

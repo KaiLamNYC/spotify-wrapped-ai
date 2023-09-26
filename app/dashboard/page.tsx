@@ -8,7 +8,7 @@ import PlaybackFooter from "@/components/PlaybackFooter";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { Card, CardHeader } from "@/components/ui/card";
 import { getAuthSession } from "@/lib/nextauth";
-import useSpotify from "@/lib/useSpotify";
+// import useSpotify from "@/lib/useSpotify";
 import axios from "axios";
 import { useSession } from "next-auth/react";
 import React, { useEffect, useState } from "react";
