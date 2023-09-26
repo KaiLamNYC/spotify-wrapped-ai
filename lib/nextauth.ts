@@ -31,7 +31,7 @@ async function refreshAccessToken(token) {
 
 		return {
 			...token,
-			accessToken: refreshedToken.accessToken,
+			accessToken: refreshedToken.access_token,
 			accessTokenExpires: Date.now() + refreshedToken.expires_in * 1000,
 			//REPLACE IF NEW ONE CAME BACK OTHERWISE KEEP OLD ONE SINCE DOESNT EXPIRE
 			refreshToken: refreshedToken.refresh_token ?? token.refreshToken,
@@ -94,14 +94,14 @@ export const authOptions = {
 					accessToken: account.access_token,
 					refreshToken: account.refresh_token,
 					username: account.providerAccountId,
-					accessTokenExpires: Date.now() + account.expires_at * 1000,
+					accessTokenExpires: account.expires_at,
 				};
 			}
 
 			// ALREADY LOGGED IN
 			//Return previous token if the access token has not expired yet
-			if (Date.now() < token.accessTokenExpires) {
-				console.log("existing access token is valid");
+			if (Date.now() < token.accessTokenExpires * 1000) {
+				console.log(`existing token is valid: ${token.accessTokenExpires}`);
 				return token;
 			}
 

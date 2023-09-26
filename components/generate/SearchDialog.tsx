@@ -85,8 +85,8 @@ const SearchDialog = ({ setSeedSongs, seedSongs }: any) => {
 					onClick={async () => {
 						// console.log(session?.accessToken);
 						// setSearchSongs(testSongs1);
-						// await updateSearchResults(searchInput);
-						await testStuff();
+						await updateSearchResults(searchInput);
+						// await testStuff();
 					}}
 				>
 					Search
@@ -108,6 +108,7 @@ const SearchDialog = ({ setSeedSongs, seedSongs }: any) => {
 										onClick={async () => {
 											console.log("clicked");
 											setSeedSongs([...seedSongs, track.name]);
+											// updateSearchResults(searchInput);
 										}}
 									>
 										Add

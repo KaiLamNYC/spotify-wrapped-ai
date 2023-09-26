@@ -24,7 +24,7 @@ export default async function Home() {
 	if (session?.user) {
 		return redirect("/dashboard");
 	}
-	// console.log(session.accessToken);
+	// console.log("hello");
 
 	return (
 		<div className='flex items-center justify-center flex-col mt-20'>

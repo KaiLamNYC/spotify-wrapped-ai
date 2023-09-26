@@ -40,7 +40,7 @@ const Songs = (props: Props) => {
 				<p key={index}>{song}</p>
 			))}
 			<SearchDialog setSeedSongs={setSeedSongs} seedSongs={seedSongs} />
-			<TestCard />
+			{/* <TestCard /> */}
 		</div>
 	);
 };

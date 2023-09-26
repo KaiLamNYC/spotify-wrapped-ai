@@ -13,9 +13,10 @@ type Props = {};
 
 const DashboardTopArtists = (props: Props) => {
 	const { data: session, status } = useSession();
-	const spotifyApi = useSpotify();
+	// const spotifyApi = useSpotify();
 	// const [topArtists, setTopArtists] = useState([]);
-	console.log(spotifyApi.getAccessToken());
+	// console.log(spotifyApi.getAccessToken());
+	console.log(session);
 	const authHeader = {
 		Authorization: `Bearer ${session?.user.accessToken}`,
 	};
