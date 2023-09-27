@@ -7,9 +7,10 @@ const songSchema = new mongoose.Schema({
 		type: String,
 		required: true,
 	},
-	id: {
+	trackId: {
 		type: String,
 		required: true,
+		unique: true,
 	},
 	img: {
 		type: String,

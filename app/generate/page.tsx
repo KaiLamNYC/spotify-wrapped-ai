@@ -9,7 +9,7 @@ import React, { useEffect, useState } from "react";
 
 type Props = {};
 
-const GeneratePlaylists = (props: Props) => {
+const GeneratePage = (props: Props) => {
 	// const { data: session } = useSession();
 
 	// const [userToken, setUserToken] = useState("");
@@ -42,4 +42,4 @@ const GeneratePlaylists = (props: Props) => {
 	);
 };
 
-export default GeneratePlaylists;
+export default GeneratePage;

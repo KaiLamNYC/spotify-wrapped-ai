@@ -17,6 +17,7 @@ const playlistSchema = new mongoose.Schema({
 		type: Number,
 		default: 0,
 	},
+
 	songs: [
 		{
 			type: mongoose.Schema.Types.ObjectId,

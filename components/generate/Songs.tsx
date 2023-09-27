@@ -46,11 +46,12 @@ const Songs = (props: Props) => {
 		},
 	});
 
+	//AFTER GENERATE PLAYLIST ONSUCCESS NEED TO REDIRECT TO NEW PAGE WITH LOADED PLAYLIST
 	const { mutate: generatePlaylist, isLoading } = useMutation({
 		//THIS IS THE FUNCTION THAT MUTATES THE DATA IN OUR DATABASE
 		mutationFn: async ({ seeds }: Input) => {
 			//THIS ENDPOINT CREATES THE GAME AND THE QUESTIONS
-			const response = await axios.post("/api/game", { seeds });
+			const response = await axios.post("/api/generatePlaylist", { seeds });
 			//RETURNING THE GAMEID TO REDIRECT
 			return response.data;
 		},
@@ -102,7 +103,7 @@ const Songs = (props: Props) => {
 									{/* {seedSongs.map((song, index) => (
 										<p key={index}>{song}</p>
 									))} */}
-									DESCRIPTION
+									PLEASE CONFIRM SONGS THEN GENERATE
 								</FormDescription>
 								<FormMessage />
 							</FormItem>

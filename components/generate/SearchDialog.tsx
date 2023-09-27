@@ -58,11 +58,8 @@ const SearchDialog = ({ setSeedSongs, seedSongs }: any) => {
 			</DialogTrigger>
 			<DialogContent>
 				<DialogHeader>
-					<DialogTitle>Search for song</DialogTitle>
-					<DialogDescription>
-						This action cannot be undone. This will permanently delete your
-						account and remove your data from our servers.
-					</DialogDescription>
+					<DialogTitle>Search For A Song</DialogTitle>
+					<DialogDescription>Add up to 5 songs!</DialogDescription>
 				</DialogHeader>
 				<Input
 					placeholder='Enter song'
