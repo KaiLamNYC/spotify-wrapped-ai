@@ -7,7 +7,7 @@ export async function POST(req: Request, res: Response) {
 		// const body = await req.json();
 		//NEED TO TAKE THE SEED SONG AND THEN MAKE AXIOS REQUEST TO RECOMMENDATION ENDPOINT
 		//NEED TO JOIN SEEDS AND SEPARATE WITH %2C IN URL
-		//NEED ACCESSTOKEN FROM FRONTEND
+		//NEED ACCESSTOKEN
 		// const { data } = await axios.get(
 		// 	`https://api.spotify.com/v1/recommendations?limit=20&seed_tracks=${seed.join(
 		// 		"%2C"

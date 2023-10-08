@@ -12,11 +12,8 @@ import { Card, CardContent, CardDescription, CardTitle } from "../ui/card";
 type Props = {};
 
 const DashboardTopArtists = (props: Props) => {
-	const { data: session, status } = useSession();
-	// const spotifyApi = useSpotify();
-	// const [topArtists, setTopArtists] = useState([]);
-	// console.log(spotifyApi.getAccessToken());
-	// console.log(session);
+	const { data: session } = useSession();
+	console.log(session);
 	const authHeader = {
 		Authorization: `Bearer ${session?.user.accessToken}`,
 	};
@@ -30,8 +27,9 @@ const DashboardTopArtists = (props: Props) => {
 			);
 			return data.data.items;
 		},
-		retry: 10,
+
 		cacheTime: 24 * 60 * 60 * 1000 + 3000000,
+		retry: 10,
 		staleTime: 24 * 60 * 60 * 1000,
 	});
 
