@@ -4,9 +4,9 @@ import Song from "./models/song.model";
 import { connectToDB } from "./mongoose";
 
 export async function getPlaylist(id) {
-	connectToDB();
-
 	try {
+		connectToDB();
+
 		const playlist = await Playlist.find({ _id: id })
 			.populate({
 				path: "songs",

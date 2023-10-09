@@ -17,14 +17,7 @@ const PlaylistPage = async ({ params }: { params: { id: string } }) => {
 
 			<div className='flex flex-col justify-center items-center w-2/3 '>
 				<h1>HERE IS YOUR GENERATED PLAYLIST</h1>
-				<p>{playlist[0].name}</p>
-				{/* <div>
-					{playlist[0].songs.map((track, index) => (
-						<div key={index}>
-							<p>{track.name}</p>
-						</div>
-					))}
-				</div> */}
+				{/* <p>{playlist[0].name}</p> */}
 
 				{playlist.length === 0 ? (
 					<p>LOADING</p>
