@@ -6,6 +6,7 @@ import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import React, { useState } from "react";
 
+import { userAgent } from "next/server";
 import { Card, CardDescription, CardTitle } from "../ui/card";
 import { Input } from "../ui/input";
 import { ScrollArea } from "../ui/scroll-area";
@@ -30,24 +31,19 @@ const Songs = (props: Props) => {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		console.log(seedSongs);
+		// console.log(seedSongs);
 		const response = await axios.post("/api/generatePlaylist", {
 			seed: seedSongs.map((song) => song.id),
 		});
-		console.log(response.data.payload);
+		console.log(response.data);
 
-		return response.data.payload;
+		return response.data;
 	};
 
 	const handleDelete = (current) => {
 		setSeedSongs(seedSongs.filter((song) => song.id !== current.id));
 	};
 
-	// const handleTest = async (e) => {
-	// 	e.preventDefault();
-
-	// 	console.log(response.data.payload);
-	// };
 	return (
 		<div>
 			<h2 className='text-lg'>Generate a playlist based on a song.</h2>

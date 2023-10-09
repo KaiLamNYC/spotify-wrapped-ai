@@ -100,8 +100,8 @@ const SearchDialog = ({ setSeedSongs, seedSongs }: any) => {
 						<h4 className='mb-4 text-sm font-medium leading-none'>SONGS</h4>
 
 						{searchData?.items.map((track, index) => (
-							<>
-								<div key={index} className='text-sm flex justify-between'>
+							<div key={index}>
+								<div className='text-sm flex justify-between'>
 									<div>
 										<p>{track.name}</p>
 										<p>{track.artists[0].name}</p>
@@ -128,7 +128,7 @@ const SearchDialog = ({ setSeedSongs, seedSongs }: any) => {
 									</Button>
 								</div>
 								<Separator className='my-2' />
-							</>
+							</div>
 						))}
 
 						<div className='text-sm'>END OF LIST</div>

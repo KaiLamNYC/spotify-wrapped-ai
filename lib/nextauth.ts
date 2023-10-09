@@ -129,7 +129,7 @@ export const authOptions = {
 			return session;
 		},
 		async signIn({ profile }) {
-			console.log(profile);
+			// console.log(profile);
 			try {
 				await connectToDB();
 				//CHECK IF USER EXISTS IN DB

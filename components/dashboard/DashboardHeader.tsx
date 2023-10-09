@@ -11,7 +11,7 @@ type Props = {};
 //ALSO MAYBE STUFF LIKE NUMBER OF PLAYLISTS ETC
 const DashboardHeader = (props: Props) => {
 	const { data: session } = useSession();
-	console.log(session);
+	// console.log(session);
 	return (
 		<div className='flex flex-row items-center p-2'>
 			<Avatar className='w-36 h-36 mr-4'>

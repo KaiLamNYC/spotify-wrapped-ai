@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 const playlistSchema = new mongoose.Schema({
-	name: { type: String, required: true },
+	name: { type: String, required: true, default: "AI Playlist" },
 	author: {
 		type: mongoose.Schema.Types.ObjectId,
 		ref: "User",
