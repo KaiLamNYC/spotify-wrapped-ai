@@ -15,9 +15,9 @@ export async function POST(req: Request, res: Response) {
 
 		//GETTING THE PLAYLIST FROM SPOTIFY
 		const { data } = await axios.get(
-			`https://api.spotify.com/v1/recommendations?limit=2&seed_tracks=${body.seed.join(
+			`https://api.spotify.com/v1/recommendations?limit=5&seed_tracks=${body.seed.join(
 				"%2C"
-			)}`,
+			)}&&min_popularity=50`,
 			{
 				headers: {
 					Authorization: `Bearer ${session?.user.accessToken}`,
