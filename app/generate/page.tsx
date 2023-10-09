@@ -18,7 +18,7 @@ const GeneratePage = (props: Props) => {
 		<div className='flex'>
 			<Navbar />
 			<div className='flex flex-col justify-center items-center w-full '>
-				<h1>GENERATE YOUR AI PLAYLIST BELOW</h1>
+				<h1 className='text-3xl p-8'>GENERATE YOUR AI PLAYLIST BELOW</h1>
 				<Tabs defaultValue='mood'>
 					<TabsList className='grid w-[300px] grid-cols-3'>
 						<TabsTrigger value='mood'>Mood</TabsTrigger>
@@ -26,7 +26,9 @@ const GeneratePage = (props: Props) => {
 						<TabsTrigger value='artist'>Artist</TabsTrigger>
 					</TabsList>
 					<TabsContent value='mood'>
-						<p>Generate a playlist based on a mood or occasion.</p>
+						<p className='text-lg'>
+							Generate a playlist based on a mood or occasion.
+						</p>
 						<Input type='text' placeholder='Describe the mood or ocassion...' />
 						<Button>Generate</Button>
 					</TabsContent>

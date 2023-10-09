@@ -8,7 +8,7 @@ const PlaylistPage = (props: Props) => {
 		<div className='flex'>
 			<Navbar />
 
-			<div className='flex flex-col items-center'></div>
+			<div className='flex flex-col items-center'>PLAYLIST HERE</div>
 		</div>
 	);
 };

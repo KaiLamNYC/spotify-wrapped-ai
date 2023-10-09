@@ -15,6 +15,7 @@ import React, { useState } from "react";
 // import useSpotify from "@/lib/useSpotify";
 import axios from "axios";
 import { Form } from "react-hook-form";
+import { Card, CardDescription, CardTitle } from "../ui/card";
 import { Input } from "../ui/input";
 import { ScrollArea } from "../ui/scroll-area";
 import { Separator } from "../ui/separator";
@@ -51,6 +52,10 @@ const SearchDialog = ({ setSeedSongs, seedSongs }: any) => {
 		}
 	}
 
+	const handleDelete = (current) => {
+		setSeedSongs(seedSongs.filter((song) => song.id !== current.id));
+	};
+
 	return (
 		<Dialog>
 			<DialogTrigger>
@@ -61,6 +66,19 @@ const SearchDialog = ({ setSeedSongs, seedSongs }: any) => {
 					<DialogTitle>Search For A Song</DialogTitle>
 					<DialogDescription>Add up to 5 songs!</DialogDescription>
 				</DialogHeader>
+				<div className='flex flex-col'>
+					{seedSongs.map((song, index) => (
+						<Card key={index} className='flex flex-row justify-between'>
+							<div className='flex flex-col'>
+								<CardTitle>{song.name}</CardTitle>
+								<CardDescription>{song.artist}</CardDescription>
+							</div>
+
+							<Button onClick={() => handleDelete(song)}>X</Button>
+						</Card>
+					))}
+				</div>
+
 				<Input
 					placeholder='Enter song'
 					type='text'
@@ -95,7 +113,14 @@ const SearchDialog = ({ setSeedSongs, seedSongs }: any) => {
 											console.log("clicked");
 											// form.setValue("seeds", seedSongs[0]);
 
-											setSeedSongs([...seedSongs, track.name]);
+											setSeedSongs([
+												...seedSongs,
+												{
+													name: track.name,
+													id: track.id,
+													artist: track.artists[0].name,
+												},
+											]);
 											// updateSearchResults(searchInput);
 										}}
 									>

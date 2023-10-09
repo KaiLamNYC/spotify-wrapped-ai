@@ -4,20 +4,22 @@ import { NextResponse } from "next/server";
 
 export async function POST(req: Request, res: Response) {
 	try {
-		// const body = await req.json();
+		const body = await req.json();
+		const session = await getAuthSession();
+
 		//NEED TO TAKE THE SEED SONG AND THEN MAKE AXIOS REQUEST TO RECOMMENDATION ENDPOINT
 		//NEED TO JOIN SEEDS AND SEPARATE WITH %2C IN URL
 		//NEED ACCESSTOKEN
-		// const { data } = await axios.get(
-		// 	`https://api.spotify.com/v1/recommendations?limit=20&seed_tracks=${seed.join(
-		// 		"%2C"
-		// 	)}`,
-		// 	{
-		// 		headers: {
-		// 			Authorization: `Bearer ${session?.user.accessToken}`,
-		// 		},
-		// 	}
-		// );
+		const { data } = await axios.get(
+			`https://api.spotify.com/v1/recommendations?limit=20&seed_tracks=${body.seed.join(
+				"%2C"
+			)}`,
+			{
+				headers: {
+					Authorization: `Bearer ${session?.user.accessToken}`,
+				},
+			}
+		);
 		//CREATE PLAYLIST IN DATABASE WITH THE INFORMATION FROM SPOTIFY
 		//ITERATE OVER THE ITEMS IN RESPONSE AND CREATE NEW SONG DOCUMENT FOR EACH, THEN CREATE PLAYLIST AS WELL
 		//USE MAP TO CREATE THE SONGS, THEN USE THE IDS TO CREATE THE PLAYLIST
@@ -26,6 +28,7 @@ export async function POST(req: Request, res: Response) {
 		// const session = await getAuthSession();
 		return NextResponse.json({
 			message: "success",
+			payload: data.tracks,
 		});
 	} catch (err) {
 		return NextResponse.json({
