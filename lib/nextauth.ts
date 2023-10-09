@@ -1,6 +1,8 @@
 import axios from "axios";
 import { DefaultSession, getServerSession } from "next-auth";
 import SpotifyProvider from "next-auth/providers/spotify";
+import User from "./models/user.model";
+import { connectToDB } from "./mongoose";
 import spotifyApi, { LOGIN_URL } from "./spotifyActions";
 
 //TYPESCRIPT STUFF
@@ -72,32 +74,6 @@ async function refreshAccessToken(token) {
 	}
 }
 
-// async function refreshAccessToken(token) {
-// 	const params = new URLSearchParams();
-// 	params.append("grant_type", "refresh_token");
-// 	params.append("refresh_token", token.refreshToken);
-// 	const response = await fetch("https://accounts.spotify.com/api/token", {
-// 		method: "POST",
-// 		headers: {
-// 			Authorization:
-// 				"Basic " +
-// 				new Buffer.from(
-// 					process.env.SPOTIFY_CLIENT_ID +
-// 						":" +
-// 						process.env.SPOTIFY_CLIENT_SECRET
-// 				).toString("base64"),
-// 		},
-// 		body: params,
-// 	});
-// 	const data = await response.json();
-// 	return {
-// 		...token,
-// 		accessToken: data.access_token,
-// 		refreshToken: data.refresh_token ?? token.refreshToken,
-// 		accessTokenExpires: Date.now() + data.expires_in * 1000,
-// 	};
-// }
-
 export const authOptions = {
 	// Configure one or more authentication providers
 	providers: [
@@ -116,6 +92,8 @@ export const authOptions = {
 
 			//SIGN IN FOR THE FIRST TIME
 			if (account) {
+				spotifyApi.setAccessToken(account.access_token);
+				spotifyApi.setRefreshToken(account.refresh_token);
 				return {
 					...token,
 					accessToken: account.access_token,
@@ -143,6 +121,31 @@ export const authOptions = {
 			// session.user.username = token.username;
 
 			return session;
+		},
+		async signIn({ profile }) {
+			console.log(profile);
+			try {
+				await connectToDB();
+				//CHECK IF USER EXISTS IN DB
+				const userExists = await User.findOne({ email: profile.email });
+
+				//CREATING IF DOESNT EXIST
+				if (!userExists) {
+					const user = await User.create({
+						name: profile.display_name,
+						//TAKING THE LARGER IMAGE FROM THE IMAGE ARRAY
+						img: profile.images[1].url,
+						email: profile.email,
+						spotifyId: profile.id,
+					});
+				}
+
+				//IF NOT THEN CREATE USER
+				return true;
+			} catch (err) {
+				console.log(err);
+				return false;
+			}
 		},
 	},
 };

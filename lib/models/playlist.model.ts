@@ -7,17 +7,17 @@ const playlistSchema = new mongoose.Schema({
 		ref: "User",
 		required: true,
 	},
-
+	//FOR LATER TO SORT BY LATEST ETC
 	createdAt: {
 		type: Date,
 		default: Date.now,
 	},
-
+	//TO SORT BY LIKES
 	likes: {
 		type: Number,
 		default: 0,
 	},
-
+	//SONGS WITHIN THAT PLAYLIST
 	songs: [
 		{
 			type: mongoose.Schema.Types.ObjectId,

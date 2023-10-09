@@ -10,10 +10,8 @@ const userSchema = new mongoose.Schema({
 		required: true,
 		unique: true,
 	},
-
 	img: {
 		type: String,
-		required: true,
 	},
 	//USERS HISTORY OF CREATIONS
 	createdPlaylists: [
@@ -29,6 +27,11 @@ const userSchema = new mongoose.Schema({
 			ref: "Playlist",
 		},
 	],
+	spotifyId: {
+		type: String,
+		required: true,
+		unique: true,
+	},
 });
 
 //IF DOESNT EXIST IN DB THEN IT CREATES THE MODEL OTHERWISE JUST READS FROM DB

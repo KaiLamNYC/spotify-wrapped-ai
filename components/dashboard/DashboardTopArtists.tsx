@@ -1,7 +1,6 @@
 "use client";
-import { getAuthSession } from "@/lib/nextauth";
-// import { fetchUserTopTracks } from "@/lib/userActions";
-// import useSpotify from "@/lib/useSpotify";
+
+import spotifyApi from "@/lib/spotifyActions";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { useSession } from "next-auth/react";
@@ -13,7 +12,8 @@ type Props = {};
 
 const DashboardTopArtists = (props: Props) => {
 	const { data: session } = useSession();
-	console.log(session);
+	// console.log(spotifyApi.getAccessToken());
+	// console.log(session.user);
 	const authHeader = {
 		Authorization: `Bearer ${session?.user.accessToken}`,
 	};
@@ -27,7 +27,6 @@ const DashboardTopArtists = (props: Props) => {
 			);
 			return data.data.items;
 		},
-
 		cacheTime: 24 * 60 * 60 * 1000 + 3000000,
 		retry: 10,
 		staleTime: 24 * 60 * 60 * 1000,

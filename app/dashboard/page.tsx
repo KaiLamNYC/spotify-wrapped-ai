@@ -1,5 +1,5 @@
 import DashboardHeader from "@/components/dashboard/DashboardHeader";
-import DashboardSavedPlaylists from "@/components/dashboard/DashboardSavedPlaylists";
+// import DashboardSavedPlaylists from "@/components/dashboard/DashboardSavedPlaylists";
 import DashboardTopArtists from "@/components/dashboard/DashboardTopArtists";
 import DashboardTopTracks from "@/components/dashboard/DashboardTopTracks";
 import LogOut from "@/components/LogOutButton";
@@ -16,23 +16,6 @@ import React, { useEffect, useState } from "react";
 type Props = {};
 
 const Dashboard = (props: Props) => {
-	// const [userToken, setUserToken] = useState("");
-	// const { data: session } = useSession();
-	// const session = getAuthSession();
-	// console.log(session);
-	// if(!session?.accessToken){
-	// 	redirect('/')
-	// const spotifyApi = useSpotify();
-	// console.log("The refresh token is " + spotifyApi.getRefreshToken());
-	// }
-	// const { data: session } = useSession();
-	// useEffect(() => {
-	// 	if (session && session?.accessToken) {
-	// 		setUserToken(session?.accessToken);
-	// 	}
-	// }, [session]);
-	// console.log(`this is token pls: ${spotifyApi.getAccessToken()}`);
-
 	return (
 		<main className='p-4 flex flex-row'>
 			<Navbar />

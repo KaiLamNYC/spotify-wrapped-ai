@@ -1,9 +1,12 @@
+import { connectToDB } from "@/lib/mongoose";
 import { getAuthSession } from "@/lib/nextauth";
 import axios from "axios";
 import { NextResponse } from "next/server";
 
 export async function POST(req: Request, res: Response) {
 	try {
+		connectToDB();
+
 		const body = await req.json();
 		const session = await getAuthSession();
 
