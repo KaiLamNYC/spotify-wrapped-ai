@@ -68,7 +68,9 @@ const Songs = (props: Props) => {
 						<Button onClick={() => handleDelete(song)}>X</Button>
 					</Card>
 				))}
-				<Button type='submit'>GENERATE</Button>
+				<Button type='submit' disabled={isLoading}>
+					GENERATE
+				</Button>
 			</form>
 			{/* <Button onClick={handleTest}>TEST SESSION</Button> */}
 		</div>
