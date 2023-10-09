@@ -117,9 +117,15 @@ export const authOptions = {
 		//ADDING ACCESSTOKEN TO SESSION
 		async session({ session, token }) {
 			session.user.accessToken = token.accessToken;
-			// session.user.refreshToken = token.refreshToken;
-			// session.user.username = token.username;
 
+			//SEARCHING DB WITH EMAIL FROM SESSION
+			const sessionUser = await User.findOne({ email: session.user.email });
+			//SETTING THE NEW IMAGE
+			session.user.image = sessionUser.img;
+			//SETTING SPOTIFY ID FOR CREATE PLAYLIST
+			session.user.spoifyId = sessionUser.spotifyId;
+			//SETTING MONGODB ID
+			session.user.mongodbId = sessionUser._id;
 			return session;
 		},
 		async signIn({ profile }) {
