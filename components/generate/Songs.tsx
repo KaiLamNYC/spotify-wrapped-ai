@@ -6,6 +6,7 @@ import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import React, { useState } from "react";
 
+import { useRouter } from "next/navigation";
 import { userAgent } from "next/server";
 import { Card, CardDescription, CardTitle } from "../ui/card";
 import { Input } from "../ui/input";
@@ -17,27 +18,33 @@ type Props = {};
 
 const Songs = (props: Props) => {
 	const [seedSongs, setSeedSongs] = useState([]);
-
+	const router = useRouter();
 	//AFTER GENERATE PLAYLIST ONSUCCESS NEED TO REDIRECT TO NEW PAGE WITH LOADED PLAYLIST
-	// const { mutate: generatePlaylist, isLoading } = useMutation({
-	// 	//THIS IS THE FUNCTION THAT MUTATES THE DATA IN OUR DATABASE
-	// 	mutationFn: async ({ seeds }: Input) => {
-	// 		//THIS ENDPOINT CREATES THE GAME AND THE QUESTIONS
-	// 		const response = await axios.post("/api/generatePlaylist", { seeds });
-	// 		//RETURNING THE GAMEID TO REDIRECT
-	// 		return response.data;
-	// 	},
-	// });
+	const { mutate: generatePlaylist, isLoading } = useMutation({
+		//THIS IS THE FUNCTION THAT MUTATES THE DATA IN OUR DATABASE
+		mutationFn: async () => {
+			//THIS ENDPOINT CREATES THE GAME AND THE QUESTIONS
+			const response = await axios.post("/api/generatePlaylist", {
+				seed: seedSongs.map((song) => song.id),
+			});
+
+			return response.data;
+		},
+		onSuccess: ({ playlistId }) => {
+			router.push(`/playlist/${playlistId}`);
+		},
+	});
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		// console.log(seedSongs);
-		const response = await axios.post("/api/generatePlaylist", {
-			seed: seedSongs.map((song) => song.id),
-		});
-		console.log(response.data);
+		//CAN DO IT MANUALLY BELOW INSTEAD OF USING MUTATE REACT QUERY
 
-		return response.data;
+		generatePlaylist();
+
+		// const response = await axios.post("/api/generatePlaylist", {
+		// 	seed: seedSongs.map((song) => song.id),
+		// });
+		// return response.data;
 	};
 
 	const handleDelete = (current) => {

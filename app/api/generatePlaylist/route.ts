@@ -69,9 +69,9 @@ export async function POST(req: Request, res: Response) {
 
 		await newPlaylist.save();
 
+		//RETURNING PLAYLIST ID TO FRONTEND
 		return NextResponse.json({
-			message: "success",
-			payload: newPlaylist,
+			playlistId: newPlaylist._id,
 		});
 	} catch (err) {
 		return NextResponse.json({
