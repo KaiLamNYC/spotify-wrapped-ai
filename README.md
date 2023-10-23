@@ -41,12 +41,11 @@ These features are designed to enhance your music streaming experience, giving y
 - User authentication with Spotify
 - User dashboard
 - User Spotify Wrapped stats
+- Generate AI playlist
 
 #### In Progress
 
-- Generate AI playlist
-
-#### To-Do
-
 - User generated playlist feed
 - Add song playback
+
+#### To-Do
