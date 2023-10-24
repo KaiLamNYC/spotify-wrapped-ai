@@ -24,7 +24,7 @@ const Songs = (props: Props) => {
 		//THIS IS THE FUNCTION THAT MUTATES THE DATA IN OUR DATABASE
 		mutationFn: async () => {
 			//THIS ENDPOINT CREATES THE GAME AND THE QUESTIONS
-			const response = await axios.post("/api/generatePlaylist", {
+			const response = await axios.post("/api/generatePlaylistWithSong", {
 				seed: seedSongs.map((song) => song.id),
 			});
 
