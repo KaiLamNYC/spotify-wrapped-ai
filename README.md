@@ -38,14 +38,28 @@ These features are designed to enhance your music streaming experience, giving y
 
 #### Completed Features
 
-- User authentication with Spotify
-- User dashboard
-- User Spotify Wrapped stats
-- Generate AI playlist
+- User Authentication with Spotify
+- User Dashboard
+- User Spotify Wrapped Stats
+- Generate AI Playlist
 
 #### In Progress
 
-- User generated playlist feed
-- Add song playback
+- Playlist UI & Functions
+- User Generated Playlist Feed
 
 #### To-Do
+
+- UI Fixes
+- Add More Statistics with Further Analysis
+
+## Progress
+
+**User Dashboard**
+![User Dashboard](/public/userDashboard.png)
+**Spotify Wrapped Stats**
+![Spotify Wrapped Stats](/public/wrappedStats.png)
+**Generate Playlist**
+![Generate Playlist](/public/createPlaylist.png)
+**View Playlist**
+![Playlist View](/public/generatedPlaylist.png)
