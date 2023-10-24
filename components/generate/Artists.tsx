@@ -12,11 +12,11 @@ import { Card, CardDescription, CardTitle } from "../ui/card";
 import { Input } from "../ui/input";
 import { ScrollArea } from "../ui/scroll-area";
 import { Separator } from "../ui/separator";
-import SearchDialog from "./SongSearchDialog";
+import SearchDialog from "./ArtistSearchDialog";
 
 type Props = {};
 
-const Songs = (props: Props) => {
+const Artists = (props: Props) => {
 	const [seedSongs, setSeedSongs] = useState([]);
 	const router = useRouter();
 	//AFTER GENERATE PLAYLIST ONSUCCESS NEED TO REDIRECT TO NEW PAGE WITH LOADED PLAYLIST
@@ -37,14 +37,8 @@ const Songs = (props: Props) => {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		//CAN DO IT MANUALLY BELOW INSTEAD OF USING MUTATE REACT QUERY
 
 		generatePlaylist();
-
-		// const response = await axios.post("/api/generatePlaylist", {
-		// 	seed: seedSongs.map((song) => song.id),
-		// });
-		// return response.data;
 	};
 
 	const handleDelete = (current) => {
@@ -53,19 +47,19 @@ const Songs = (props: Props) => {
 
 	return (
 		<div>
-			<h2 className='text-lg'>Generate a playlist based on a song.</h2>
+			<h2 className='text-lg'>Generate a playlist based on Artists.</h2>
 			{/* <p>test</p> */}
 
 			<SearchDialog setSeedSongs={setSeedSongs} seedSongs={seedSongs} />
 			<form onSubmit={handleSubmit}>
-				{seedSongs.map((song, index) => (
+				{seedSongs.map((artist, index) => (
 					<Card key={index} className='flex flex-row justify-between'>
 						<div className='flex flex-col'>
-							<CardTitle>{song.name}</CardTitle>
-							<CardDescription>{song.artist}</CardDescription>
+							<CardTitle>{artist.name}</CardTitle>
+							<CardDescription>{artist.followers} followers</CardDescription>
 						</div>
 
-						<Button onClick={() => handleDelete(song)}>X</Button>
+						<Button onClick={() => handleDelete(artist)}>X</Button>
 					</Card>
 				))}
 				<Button type='submit' disabled={isLoading}>
@@ -77,4 +71,4 @@ const Songs = (props: Props) => {
 	);
 };
 
-export default Songs;
+export default Artists;

@@ -22,7 +22,7 @@ import { Separator } from "../ui/separator";
 
 // type Props = { setSeedSongs };
 
-const SearchDialog = ({ setSeedSongs, seedSongs }: any) => {
+const ArtistSearchDialog = ({ setSeedSongs, seedSongs }: any) => {
 	const [searchSongs, setSearchSongs] = useState<{ name: string }[]>([]);
 
 	const [searchData, setSearchData] = useState();
@@ -38,14 +38,15 @@ const SearchDialog = ({ setSeedSongs, seedSongs }: any) => {
 
 		try {
 			const response = await axios.get(
-				`https://api.spotify.com/v1/search?q=${encodedQuery}&type=track&limit=10`,
+				`https://api.spotify.com/v1/search?q=${encodedQuery}&type=artist`,
 				{
 					headers: {
 						Authorization: `Bearer ${session?.user.accessToken}`,
 					},
 				}
 			);
-			setSearchData(response.data.tracks);
+			// console.log("getting response");
+			setSearchData(response.data.artists);
 		} catch (error) {
 			// Handle any errors here
 			console.error("Error fetching search results:", error);
@@ -59,19 +60,19 @@ const SearchDialog = ({ setSeedSongs, seedSongs }: any) => {
 	return (
 		<Dialog>
 			<DialogTrigger>
-				<Button>Select Songs</Button>
+				<Button>Select Artists</Button>
 			</DialogTrigger>
 			<DialogContent>
 				<DialogHeader>
-					<DialogTitle>Search For A Song</DialogTitle>
-					<DialogDescription>Add up to 5 songs!</DialogDescription>
+					<DialogTitle>Search For Artists</DialogTitle>
+					<DialogDescription>Add up to 5 artists!</DialogDescription>
 				</DialogHeader>
 				<div className='flex flex-col'>
 					{seedSongs.map((song, index) => (
 						<Card key={index} className='flex flex-row justify-between'>
 							<div className='flex flex-col'>
 								<CardTitle>{song.name}</CardTitle>
-								<CardDescription>{song.artist}</CardDescription>
+								<CardDescription>{song.followers} followers</CardDescription>
 							</div>
 
 							<Button onClick={() => handleDelete(song)}>X</Button>
@@ -80,7 +81,7 @@ const SearchDialog = ({ setSeedSongs, seedSongs }: any) => {
 				</div>
 
 				<Input
-					placeholder='Enter song'
+					placeholder='Enter artist'
 					type='text'
 					value={searchInput}
 					onChange={(e) => setSearchInput(e.target.value)}
@@ -97,14 +98,14 @@ const SearchDialog = ({ setSeedSongs, seedSongs }: any) => {
 				</Button>
 				<ScrollArea className='h-72 w-full rounded-md border'>
 					<div className='p-4'>
-						<h4 className='mb-4 text-sm font-medium leading-none'>SONGS</h4>
+						<h4 className='mb-4 text-sm font-medium leading-none'>ARTISTS</h4>
 
 						{searchData?.items.map((track, index) => (
 							<div key={index}>
 								<div className='text-sm flex justify-between'>
 									<div>
 										<p>{track.name}</p>
-										<p>{track.artists[0].name}</p>
+										<p>{track.followers.total} followers</p>
 										<p>{track.id}</p>
 									</div>
 
@@ -118,7 +119,7 @@ const SearchDialog = ({ setSeedSongs, seedSongs }: any) => {
 												{
 													name: track.name,
 													id: track.id,
-													artist: track.artists[0].name,
+													followers: track.followers.total,
 												},
 											]);
 											// updateSearchResults(searchInput);
@@ -141,4 +142,4 @@ const SearchDialog = ({ setSeedSongs, seedSongs }: any) => {
 	);
 };
 
-export default SearchDialog;
+export default ArtistSearchDialog;

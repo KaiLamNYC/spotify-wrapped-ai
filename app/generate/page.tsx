@@ -1,4 +1,5 @@
 import Navbar from "@/components/Navbar";
+import Artists from "@/components/generate/Artists";
 import Songs from "@/components/generate/Songs";
 import { Button } from "@/components/ui/button";
 
@@ -36,7 +37,8 @@ const GeneratePage = (props: Props) => {
 						<Songs />
 					</TabsContent>
 					<TabsContent value='artist'>
-						<p>Generate a playlist based on an artist.</p>
+						{/* <p>Generate a playlist based on an artist.</p> */}
+						<Artists />
 					</TabsContent>
 				</Tabs>
 			</div>
